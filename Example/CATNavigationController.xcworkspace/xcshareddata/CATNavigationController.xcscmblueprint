@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F8F5E960FD11CE5EFC00DBD007C1192D90D22F6C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "ACBE202494F566A2854549548D86C0C22647123F" : 0,
+    "F8F5E960FD11CE5EFC00DBD007C1192D90D22F6C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CFB54293-B419-4C3D-BB8D-BC79AE23E52B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "ACBE202494F566A2854549548D86C0C22647123F" : "",
+    "F8F5E960FD11CE5EFC00DBD007C1192D90D22F6C" : "CATNavigationController\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CATNavigationController",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Example\/CATNavigationController.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitlab.com:lbencs\/Dome.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ACBE202494F566A2854549548D86C0C22647123F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lbencs\/CATNavigationController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F8F5E960FD11CE5EFC00DBD007C1192D90D22F6C"
+    }
+  ]
+}

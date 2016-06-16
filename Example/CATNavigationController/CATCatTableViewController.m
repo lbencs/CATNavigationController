@@ -24,16 +24,17 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+	self.title = @"Search";
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-	[super viewWillAppear:animated];
-	self.navigationController.navigationBar.hidden = YES;
-}
-- (void)viewWillDisappear:(BOOL)animated{
-	[super viewWillDisappear:animated];
-	self.navigationController.navigationBar.hidden = NO;
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//	[super viewWillAppear:animated];
+////	[self.navigationController setNavigationBarHidden:YES animated:animated];
+//}
+//- (void)viewWillDisappear:(BOOL)animated{
+//	[super viewWillDisappear:animated];
+////	[self.navigationController setNavigationBarHidden:NO animated:animated];
+//}
 
 
 - (void)didReceiveMemoryWarning {

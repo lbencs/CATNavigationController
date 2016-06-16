@@ -7,6 +7,8 @@
 //
 
 #import "CATNavigationViewController.h"
+#import "CATCoreNavigationController.h"
+#import "CATWrapViewController.h"
 #import "CATNavigationTransitioningAnimationDefault.h"
 
 @interface CATNavigationViewController ()<UINavigationControllerDelegate>
@@ -17,12 +19,27 @@
 
 @implementation CATNavigationViewController
 
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
+	if (self = [super init]) {
+		self.viewControllers = @[[CATWrapViewController wrapWithViewController:rootViewController]];
+	}
+	return self;
+}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+	if (self = [super initWithCoder:aDecoder]) {
+		self.viewControllers = @[[CATWrapViewController wrapWithViewController:self.viewControllers.firstObject]];
+	}
+	return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	self.delegate = self;
-	
-	
+	[self setNavigationBarHidden:YES];
+//	self.delegate = self;
+//	
+//
+#if 0
 	UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
 	gesture.enabled = NO;
 	UIView *gestureView = gesture.view;
@@ -32,12 +49,35 @@
 	popRecognizer.maximumNumberOfTouches = 1;
 	[gestureView addGestureRecognizer:popRecognizer];
 	
-	[popRecognizer addTarget:self action:@selector(handleControllerPop:)];
+//	[popRecognizer addTarget:self action:@selector(handleControllerPop:)];
+	
+	id target = gesture.delegate;
+	SEL action = NSSelectorFromString(@"handleNavigationTransition:");
+//	popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
+	[popRecognizer addTarget:target action:action];
+	popRecognizer.maximumNumberOfTouches = 1;
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Delegate
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+	CGPoint beginningLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
+	CGFloat maxAllowedInitialDistance = 200;
+	if (maxAllowedInitialDistance > 0 && beginningLocation.x > maxAllowedInitialDistance) {
+		return NO;
+	}
+	if (self.childViewControllers.count == 1) {
+		return NO;
+	}
+	if ([[self valueForKey:@"_isTransitioning"] boolValue]) {
+		return NO;
+	}
+	return YES;
 }
 
 - (UIViewController *)at_popViewControllerAnimated:(BOOL)animated{
@@ -47,6 +87,12 @@
 	return [super pushViewController:viewController animated:animated];
 }
 
+//- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+//	[[CATCoreNavigationController shareNavigationController] pushViewController:[CATWrapViewController wrapWithViewController:viewController] animated:animated];
+//}
+//- (UIViewController *)popViewControllerAnimated:(BOOL)animated{
+//	return [[CATCoreNavigationController shareNavigationController] popViewControllerAnimated:animated];
+//}
 
 /**
  *  我们把用户的每次Pan手势操作作为一次pop动画的执行
@@ -110,24 +156,25 @@
 //	return nil;
 //}
 
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
-	if (operation == UINavigationControllerOperationPop) {
-		NSLog(@"pop");
-		return [[CATNavigationTransitioningAnimationDefault alloc] init];
-	}else if (operation = UINavigationControllerOperationPush){
-		NSLog(@"push");
-	}else if (operation == UINavigationControllerOperationNone){
-		NSLog(@"none");
-	}
-	return nil;
-}
+//- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+//	if (operation == UINavigationControllerOperationPop) {
+//		NSLog(@"pop");
+//		return [[CATNavigationTransitioningAnimationDefault alloc] init];
+//	}else if (operation = UINavigationControllerOperationPush){
+//		NSLog(@"push");
+//	}else if (operation == UINavigationControllerOperationNone){
+//		NSLog(@"none");
+//	}
+//	return nil;
+//}
+//
+//- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+//	if ([animationController isKindOfClass:[CATNavigationTransitioningAnimationDefault class]]) {
+//		return self.interactivePopTransition;
+//	}
+//	return nil;
+//}
 
-- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
-	if ([animationController isKindOfClass:[CATNavigationTransitioningAnimationDefault class]]) {
-		return self.interactivePopTransition;
-	}
-	return nil;
-}
 /*
 #pragma mark - Navigation
 

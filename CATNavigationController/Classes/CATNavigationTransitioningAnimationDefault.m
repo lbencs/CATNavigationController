@@ -26,13 +26,28 @@
 	[containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
 	NSTimeInterval duration = [self transitionDuration:transitionContext];
 	
-	toViewController.view.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth([UIScreen mainScreen].bounds), 0);
+//	toViewController.view.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth([UIScreen mainScreen].bounds), 0);
+	toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
+	UIView *mask = [[UIView alloc] initWithFrame:toViewController.view.bounds];
+	[toViewController.view addSubview:mask];
+	mask.backgroundColor = [UIColor blackColor];
+	mask.alpha = 0.8;
+	
+	UINavigationController *nvc = (UINavigationController *)fromViewController.parentViewController;
+	if (nvc) {
+		NSLog(@"%@",nvc);
+	}
 	
 	[UIView animateWithDuration:duration
 					 animations:^{
+						 
 						 fromViewController.view.transform = CGAffineTransformMakeTranslation(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
-						 toViewController.view.transform = CGAffineTransformMakeTranslation(0, 0);
+						 toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+						 mask.alpha = 0.0f;
+//						 toViewController.view.transform = CGAffineTransformMakeTranslation(0, 0);
+//						 toViewController.view.transform = CGAffineTransformScale(<#CGAffineTransform t#>, <#CGFloat sx#>, <#CGFloat sy#>)
 					 } completion:^(BOOL finished) {
+						 [mask removeFromSuperview];
 						 [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
 					 }];
 }

@@ -7,6 +7,7 @@
 //
 
 #import "UINavigationBar+CATCustom.h"
+#import "UIImage+CATOO.h"
 #import <objc/runtime.h>
 
 extern NSInteger const kCATCustomExcludeAlphaTag = 999012;
@@ -33,16 +34,16 @@ static char CATCustomEmptyImageKey;
 	[self _setAlpha:alpha forSubviewsOfView:self];
 }
 - (void)at_undo{
-	[self setBackgroundImage:self._backgroundImage forBarMetrics:UIBarMetricsDefault];
 	[self._maskLayer removeFromSuperview];
 	self._maskLayer = nil;
 	self._backgroundImage = nil;
 }
 
-
-- (void)at_setBottomLineAlpha:(CGFloat)alpha{
-}
 - (void)at_setBottomLineColor:(UIColor *)color{
+	[self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+	UIImage *line = [UIImage at_imageWithColor:color withSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0.5)];
+	[self setShadowImage:[UIImage new]];
+	[self setShadowImage:line];
 }
 
 #pragma mark - privates methods
@@ -70,9 +71,8 @@ static char CATCustomEmptyImageKey;
 - (UIView *)_maskLayer{
 	UIView *layer = objc_getAssociatedObject(self, &CATCustomMaskLayerKey);
 	if (!layer) {
-		self._backgroundImage = [self backgroundImageForBarMetrics:UIBarMetricsDefault];
-		[self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 		
+		[self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 		layer = [[UIView alloc] initWithFrame:CGRectMake(0, -20, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(self.bounds) + 20)];
 		layer.userInteractionEnabled = NO;
 		layer.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;

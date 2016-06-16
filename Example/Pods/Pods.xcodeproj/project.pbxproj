@@ -7,22 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20DAD1876A9614A1E0DBC4281C90B16B /* UINavigationItem+CATCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = 590C7FD2708E0AC1104B1F04D81470CC /* UINavigationItem+CATCustom.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		35F641B3F9FE7C95D520EA6669D7AB84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		467313CF5DDD885B8B2FB6A586D7C14C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
-		4F0D64E14C662A8529A2DCB16046A32E /* UINavigationBar+CATCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = FCF269FD34EC647B822499B432D8A0E5 /* UINavigationBar+CATCustom.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		602AB85709096241A9C739B51A33D767 /* CATNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40EC76181FDC2D84B65C1921EE160B45 /* CATNavigationViewController.m */; };
+		441D5E79EF290723CB7272CBA931E15D /* CATWrapViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C0A0BF85DF3585CF17EB8FF2D52157F /* CATWrapViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		49603A198A882205D7E7B2032CB0D771 /* UINavigationBar+CATCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = 057B90085CD705C2FCB0F7FFEC599E11 /* UINavigationBar+CATCustom.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		51111BF7CF9874F006FEE18DB799E883 /* CATCoreNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = DECD2601D24107541CED51751BCB469A /* CATCoreNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D0F2A3EF5DEDABA2F0AC6659B33EFA1 /* UINavigationController+CATCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = 00242C0C73A22BC757780CC9C4DA3905 /* UINavigationController+CATCustom.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C249399128326CD912D364358044AFB /* CATNavigationController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB190171E8AF34748618C8AEA748992A /* CATNavigationController-dummy.m */; };
 		718D806667D622009D0904AB60EFC808 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		72C5FD2E6F9B54C018BD7FD2E2599B08 /* CATWrapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0E89A103EEDF8B9A4FBD6498939DC /* CATWrapViewController.m */; };
 		8E693A9CB88000FB88B58F2EFF2FB170 /* Pods-CATNavigationController_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6EDEB286EC4CAC8D61A2B73AF3D3716 /* Pods-CATNavigationController_Example-dummy.m */; };
-		B398A0E3E47B446B24211A31E861B898 /* CATNavigationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F3B8DD98F65C5C779CB68E240601ACB6 /* CATNavigationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BDA046661D1168AF000F3B61 /* UINavigationItem+CATCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = BDA046641D1168AF000F3B61 /* UINavigationItem+CATCustom.h */; };
-		BDA046671D1168AF000F3B61 /* UINavigationItem+CATCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA046651D1168AF000F3B61 /* UINavigationItem+CATCustom.m */; };
-		BDA0466A1D116A62000F3B61 /* UINavigationController+CATCustom.h in Headers */ = {isa = PBXBuildFile; fileRef = BDA046681D116A62000F3B61 /* UINavigationController+CATCustom.h */; };
-		BDA0466B1D116A62000F3B61 /* UINavigationController+CATCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA046691D116A62000F3B61 /* UINavigationController+CATCustom.m */; };
-		BDA0466E1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.h in Headers */ = {isa = PBXBuildFile; fileRef = BDA0466C1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.h */; };
-		BDA0466F1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA0466D1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.m */; };
-		CDE07FF841C6E3CFD19D1CFEBB39D2F6 /* UINavigationBar+CATCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 43950732D20E5000FCD10C048891A5DC /* UINavigationBar+CATCustom.m */; };
+		9DB3BF3590B6A73820EA259218CDDA41 /* CATNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = A51CA4889F81B69B8C8F3DDF453BD87B /* CATNavigationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A31EFF510C5562562002C550BDF548B4 /* UINavigationController+CATCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB94E42EF4E8FA40464BCBB9DFA0AB2 /* UINavigationController+CATCustom.m */; };
+		AE7160024EF9895B830BF77EAAC0EBD9 /* CATCoreNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D5C46433FE2CA928BFE84B456B3C17 /* CATCoreNavigationController.m */; };
+		B73826F8983018EBB0CCC0D9FD72256D /* CATNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E2583EAACD31D9B89D7B53375D10038F /* CATNavigationBar.m */; };
+		CDE029C0580F35D174240F44B2F71988 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
+		D12CC0530648899C4953F4EFCA39F845 /* UIImage+CATOO.m in Sources */ = {isa = PBXBuildFile; fileRef = 561BD63614D7085D936011BE69A1848C /* UIImage+CATOO.m */; };
 		D709FD93B34130DF1F26C9642F87A598 /* Pods-CATNavigationController_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD53B1497F867EE70B3D040B8AA6EF /* Pods-CATNavigationController_Tests-dummy.m */; };
-		DD2750E6E71E2471E1906490E25D0AB9 /* CATNavigationController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DB190171E8AF34748618C8AEA748992A /* CATNavigationController-dummy.m */; };
+		DC657258FBFB0D87968D689A66FB2B6D /* UINavigationBar+CATCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AC3B2ED025E1B67496AD11A10BFDC28 /* UINavigationBar+CATCustom.m */; };
+		DF39CDE50B17A11FFB402D0748223E4B /* CATNavigationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 10374E6C23A6BA2E38BD131FE0052E10 /* CATNavigationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E96A724D8671C5939E5795671EE7A12E /* CATNavigationTransitioningAnimationDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C77DA3E6F3F626EFCAC17BC045BFE7C /* CATNavigationTransitioningAnimationDefault.m */; };
+		F168BEB96F3B4CB62B52C5F24A243E45 /* UIImage+CATOO.h in Headers */ = {isa = PBXBuildFile; fileRef = D63F2548F183D7FBEA2516FC888CB241 /* UIImage+CATOO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA7FD6402381610A2AA18661F23900B5 /* CATNavigationTransitioningAnimationDefault.h in Headers */ = {isa = PBXBuildFile; fileRef = AB1D05EEE9016136F9EDC4FDDC7A89A8 /* CATNavigationTransitioningAnimationDefault.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCBA4F2F33B0A0A1DDF29119118FF2BE /* CATNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069071EB2CAA57E444B9995048526493 /* CATNavigationViewController.m */; };
+		FD45B989165DF440FA6ABB1AE69BE504 /* UINavigationItem+CATCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C65F54BCE500BEDE1E3A3CF257BFBA /* UINavigationItem+CATCustom.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,44 +38,52 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8794074A70A7AE4B5183D4183296894E;
+			remoteGlobalIDString = 2395D70293A42D44EE757AB1FA8528E7;
 			remoteInfo = CATNavigationController;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00242C0C73A22BC757780CC9C4DA3905 /* UINavigationController+CATCustom.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CATCustom.h"; sourceTree = "<group>"; };
 		008272531E86934BC9D09C933F244F1E /* CATNavigationController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CATNavigationController-prefix.pch"; sourceTree = "<group>"; };
+		057B90085CD705C2FCB0F7FFEC599E11 /* UINavigationBar+CATCustom.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CATCustom.h"; sourceTree = "<group>"; };
+		069071EB2CAA57E444B9995048526493 /* CATNavigationViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CATNavigationViewController.m; sourceTree = "<group>"; };
+		10374E6C23A6BA2E38BD131FE0052E10 /* CATNavigationViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CATNavigationViewController.h; sourceTree = "<group>"; };
 		1316D99A6AE1C663265550E394FB743B /* Pods-CATNavigationController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CATNavigationController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		1A2A744C02E89197D49A6893DE0B81D3 /* Pods-CATNavigationController_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CATNavigationController_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		1E2A374D2C319C81D16F0D5D0AFFB720 /* Pods-CATNavigationController_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CATNavigationController_Example-resources.sh"; sourceTree = "<group>"; };
-		40EC76181FDC2D84B65C1921EE160B45 /* CATNavigationViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CATNavigationViewController.m; sourceTree = "<group>"; };
+		30D5C46433FE2CA928BFE84B456B3C17 /* CATCoreNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CATCoreNavigationController.m; sourceTree = "<group>"; };
+		38C65F54BCE500BEDE1E3A3CF257BFBA /* UINavigationItem+CATCustom.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+CATCustom.m"; sourceTree = "<group>"; };
 		42EE6D9761DD241778BB268AB2BAC7C0 /* CATNavigationController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CATNavigationController.xcconfig; sourceTree = "<group>"; };
-		43950732D20E5000FCD10C048891A5DC /* UINavigationBar+CATCustom.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CATCustom.m"; sourceTree = "<group>"; };
 		4B164ED9B9BD6B828D5953AD65CD179F /* Pods-CATNavigationController_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CATNavigationController_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4CAD53B1497F867EE70B3D040B8AA6EF /* Pods-CATNavigationController_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CATNavigationController_Tests-dummy.m"; sourceTree = "<group>"; };
 		50E2D3B84C7F0BD22EDF380D3E3AC1D9 /* Pods-CATNavigationController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CATNavigationController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		53A130CAA1B8CC39DB659863DFE039DB /* Pods-CATNavigationController_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CATNavigationController_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		54C6703ED43D003F629535A8EB6EB894 /* Pods-CATNavigationController_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CATNavigationController_Tests-resources.sh"; sourceTree = "<group>"; };
+		561BD63614D7085D936011BE69A1848C /* UIImage+CATOO.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CATOO.m"; sourceTree = "<group>"; };
+		590C7FD2708E0AC1104B1F04D81470CC /* UINavigationItem+CATCustom.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+CATCustom.h"; sourceTree = "<group>"; };
 		5F217253AAE353C3D8F75AA7694854BC /* libPods-CATNavigationController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CATNavigationController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62E020384F04AAC2E5761C411C5F1D0A /* libPods-CATNavigationController_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CATNavigationController_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C0A0BF85DF3585CF17EB8FF2D52157F /* CATWrapViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CATWrapViewController.h; sourceTree = "<group>"; };
+		7C77DA3E6F3F626EFCAC17BC045BFE7C /* CATNavigationTransitioningAnimationDefault.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CATNavigationTransitioningAnimationDefault.m; sourceTree = "<group>"; };
 		7D0D72F9C976F894B3C82007DE60B5BC /* Pods-CATNavigationController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CATNavigationController_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		84D0E89A103EEDF8B9A4FBD6498939DC /* CATWrapViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CATWrapViewController.m; sourceTree = "<group>"; };
+		8AC3B2ED025E1B67496AD11A10BFDC28 /* UINavigationBar+CATCustom.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+CATCustom.m"; sourceTree = "<group>"; };
 		8FF3C3FAC3E53580DEF9496E4DCD2062 /* Pods-CATNavigationController_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CATNavigationController_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A51CA4889F81B69B8C8F3DDF453BD87B /* CATNavigationBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CATNavigationBar.h; sourceTree = "<group>"; };
+		AB1D05EEE9016136F9EDC4FDDC7A89A8 /* CATNavigationTransitioningAnimationDefault.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CATNavigationTransitioningAnimationDefault.h; sourceTree = "<group>"; };
 		ABB7424CB96F0E1AE2A7735938634549 /* libCATNavigationController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCATNavigationController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC7B23ED173E54FEDF69B2E2F96492A4 /* Pods-CATNavigationController_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CATNavigationController_Example-frameworks.sh"; sourceTree = "<group>"; };
-		BDA046641D1168AF000F3B61 /* UINavigationItem+CATCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+CATCustom.h"; sourceTree = "<group>"; };
-		BDA046651D1168AF000F3B61 /* UINavigationItem+CATCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+CATCustom.m"; sourceTree = "<group>"; };
-		BDA046681D116A62000F3B61 /* UINavigationController+CATCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CATCustom.h"; sourceTree = "<group>"; };
-		BDA046691D116A62000F3B61 /* UINavigationController+CATCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CATCustom.m"; sourceTree = "<group>"; };
-		BDA0466C1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATNavigationTransitioningAnimationDefault.h; sourceTree = "<group>"; };
-		BDA0466D1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATNavigationTransitioningAnimationDefault.m; sourceTree = "<group>"; };
+		BCB94E42EF4E8FA40464BCBB9DFA0AB2 /* UINavigationController+CATCustom.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CATCustom.m"; sourceTree = "<group>"; };
 		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D63F2548F183D7FBEA2516FC888CB241 /* UIImage+CATOO.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIImage+CATOO.h"; sourceTree = "<group>"; };
 		D6EDEB286EC4CAC8D61A2B73AF3D3716 /* Pods-CATNavigationController_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CATNavigationController_Example-dummy.m"; sourceTree = "<group>"; };
 		D845A6A9D6DAC1CBA4FD15049C2FF1F6 /* Pods-CATNavigationController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CATNavigationController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DB190171E8AF34748618C8AEA748992A /* CATNavigationController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CATNavigationController-dummy.m"; sourceTree = "<group>"; };
+		DECD2601D24107541CED51751BCB469A /* CATCoreNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CATCoreNavigationController.h; sourceTree = "<group>"; };
+		E2583EAACD31D9B89D7B53375D10038F /* CATNavigationBar.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = CATNavigationBar.m; sourceTree = "<group>"; };
 		F2D2CBFE29406C8DBDEB2B981EBB26A3 /* Pods-CATNavigationController_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CATNavigationController_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		F3B8DD98F65C5C779CB68E240601ACB6 /* CATNavigationViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = CATNavigationViewController.h; sourceTree = "<group>"; };
-		FCF269FD34EC647B822499B432D8A0E5 /* UINavigationBar+CATCustom.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+CATCustom.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,19 +95,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3AF5179798D25D78ABA07EDF52463D19 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				467313CF5DDD885B8B2FB6A586D7C14C /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		663275D1FB44834CF09CADDAC521B05F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				718D806667D622009D0904AB60EFC808 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		979EE0A4C48C73DC2D2574EF44E0625B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDE029C0580F35D174240F44B2F71988 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,14 +132,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		48B4A6AED4B383429C2B0139503BAC3C /* CATNavigationController */ = {
-			isa = PBXGroup;
-			children = (
-				B027E48201EC73B6031530809A8EE6F4 /* Classes */,
-			);
-			path = CATNavigationController;
-			sourceTree = "<group>";
-		};
 		49772EF82FA895624DC687D523F4AB4D /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +152,31 @@
 			);
 			sourceTree = "<group>";
 		};
+		8F6571ECDDBFA8FECABF46A17BE425DC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DECD2601D24107541CED51751BCB469A /* CATCoreNavigationController.h */,
+				30D5C46433FE2CA928BFE84B456B3C17 /* CATCoreNavigationController.m */,
+				A51CA4889F81B69B8C8F3DDF453BD87B /* CATNavigationBar.h */,
+				E2583EAACD31D9B89D7B53375D10038F /* CATNavigationBar.m */,
+				AB1D05EEE9016136F9EDC4FDDC7A89A8 /* CATNavigationTransitioningAnimationDefault.h */,
+				7C77DA3E6F3F626EFCAC17BC045BFE7C /* CATNavigationTransitioningAnimationDefault.m */,
+				10374E6C23A6BA2E38BD131FE0052E10 /* CATNavigationViewController.h */,
+				069071EB2CAA57E444B9995048526493 /* CATNavigationViewController.m */,
+				7C0A0BF85DF3585CF17EB8FF2D52157F /* CATWrapViewController.h */,
+				84D0E89A103EEDF8B9A4FBD6498939DC /* CATWrapViewController.m */,
+				D63F2548F183D7FBEA2516FC888CB241 /* UIImage+CATOO.h */,
+				561BD63614D7085D936011BE69A1848C /* UIImage+CATOO.m */,
+				057B90085CD705C2FCB0F7FFEC599E11 /* UINavigationBar+CATCustom.h */,
+				8AC3B2ED025E1B67496AD11A10BFDC28 /* UINavigationBar+CATCustom.m */,
+				00242C0C73A22BC757780CC9C4DA3905 /* UINavigationController+CATCustom.h */,
+				BCB94E42EF4E8FA40464BCBB9DFA0AB2 /* UINavigationController+CATCustom.m */,
+				590C7FD2708E0AC1104B1F04D81470CC /* UINavigationItem+CATCustom.h */,
+				38C65F54BCE500BEDE1E3A3CF257BFBA /* UINavigationItem+CATCustom.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		9084D15447FE1605B085564D9C1DB33E /* Pods-CATNavigationController_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,21 +192,12 @@
 			path = "Target Support Files/Pods-CATNavigationController_Tests";
 			sourceTree = "<group>";
 		};
-		B027E48201EC73B6031530809A8EE6F4 /* Classes */ = {
+		9408F646011DD283CE1622FEE1209982 /* CATNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				F3B8DD98F65C5C779CB68E240601ACB6 /* CATNavigationViewController.h */,
-				40EC76181FDC2D84B65C1921EE160B45 /* CATNavigationViewController.m */,
-				FCF269FD34EC647B822499B432D8A0E5 /* UINavigationBar+CATCustom.h */,
-				43950732D20E5000FCD10C048891A5DC /* UINavigationBar+CATCustom.m */,
-				BDA046641D1168AF000F3B61 /* UINavigationItem+CATCustom.h */,
-				BDA046651D1168AF000F3B61 /* UINavigationItem+CATCustom.m */,
-				BDA046681D116A62000F3B61 /* UINavigationController+CATCustom.h */,
-				BDA046691D116A62000F3B61 /* UINavigationController+CATCustom.m */,
-				BDA0466C1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.h */,
-				BDA0466D1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.m */,
+				8F6571ECDDBFA8FECABF46A17BE425DC /* Classes */,
 			);
-			path = Classes;
+			path = CATNavigationController;
 			sourceTree = "<group>";
 		};
 		B8F101B904B9BFB24A89C92C0846B636 /* Development Pods */ = {
@@ -221,7 +245,7 @@
 		E3EF4E3EE20C267AAFE90E39653FA9FD /* CATNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				48B4A6AED4B383429C2B0139503BAC3C /* CATNavigationController */,
+				9408F646011DD283CE1622FEE1209982 /* CATNavigationController */,
 				C88E787BDD90DFCF1A1000DF0BE976D6 /* Support Files */,
 			);
 			name = CATNavigationController;
@@ -231,21 +255,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4B80C2E9631988E6AFC1DB8C9F912705 /* Headers */ = {
+		AC4F9FD0E9873A15DD9B09F03BBDC37E /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDA0466A1D116A62000F3B61 /* UINavigationController+CATCustom.h in Headers */,
-				B398A0E3E47B446B24211A31E861B898 /* CATNavigationViewController.h in Headers */,
-				BDA0466E1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.h in Headers */,
-				4F0D64E14C662A8529A2DCB16046A32E /* UINavigationBar+CATCustom.h in Headers */,
-				BDA046661D1168AF000F3B61 /* UINavigationItem+CATCustom.h in Headers */,
+				51111BF7CF9874F006FEE18DB799E883 /* CATCoreNavigationController.h in Headers */,
+				9DB3BF3590B6A73820EA259218CDDA41 /* CATNavigationBar.h in Headers */,
+				FA7FD6402381610A2AA18661F23900B5 /* CATNavigationTransitioningAnimationDefault.h in Headers */,
+				DF39CDE50B17A11FFB402D0748223E4B /* CATNavigationViewController.h in Headers */,
+				441D5E79EF290723CB7272CBA931E15D /* CATWrapViewController.h in Headers */,
+				F168BEB96F3B4CB62B52C5F24A243E45 /* UIImage+CATOO.h in Headers */,
+				49603A198A882205D7E7B2032CB0D771 /* UINavigationBar+CATCustom.h in Headers */,
+				5D0F2A3EF5DEDABA2F0AC6659B33EFA1 /* UINavigationController+CATCustom.h in Headers */,
+				20DAD1876A9614A1E0DBC4281C90B16B /* UINavigationItem+CATCustom.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		2395D70293A42D44EE757AB1FA8528E7 /* CATNavigationController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47C331BBFAE7D727E183123210AC624E /* Build configuration list for PBXNativeTarget "CATNavigationController" */;
+			buildPhases = (
+				9B8A98F5B18BA602F26449FADDB0709C /* Sources */,
+				979EE0A4C48C73DC2D2574EF44E0625B /* Frameworks */,
+				AC4F9FD0E9873A15DD9B09F03BBDC37E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CATNavigationController;
+			productName = CATNavigationController;
+			productReference = ABB7424CB96F0E1AE2A7735938634549 /* libCATNavigationController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		618F28365939FB9B107CD1AE74D72FFD /* Pods-CATNavigationController_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF204E79375D3F7E2BDC33B954B3DD1E /* Build configuration list for PBXNativeTarget "Pods-CATNavigationController_Example" */;
@@ -279,23 +324,6 @@
 			productReference = 62E020384F04AAC2E5761C411C5F1D0A /* libPods-CATNavigationController_Tests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		8794074A70A7AE4B5183D4183296894E /* CATNavigationController */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4CEEAB00E7E3910BD22C09AA9E7DACC0 /* Build configuration list for PBXNativeTarget "CATNavigationController" */;
-			buildPhases = (
-				C4390DA4D22D492038388D2289FCE206 /* Sources */,
-				3AF5179798D25D78ABA07EDF52463D19 /* Frameworks */,
-				4B80C2E9631988E6AFC1DB8C9F912705 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CATNavigationController;
-			productName = CATNavigationController;
-			productReference = ABB7424CB96F0E1AE2A7735938634549 /* libCATNavigationController.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -317,7 +345,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8794074A70A7AE4B5183D4183296894E /* CATNavigationController */,
+				2395D70293A42D44EE757AB1FA8528E7 /* CATNavigationController */,
 				618F28365939FB9B107CD1AE74D72FFD /* Pods-CATNavigationController_Example */,
 				645E2B1C44216E38852EDF45D7F644B3 /* Pods-CATNavigationController_Tests */,
 			);
@@ -333,24 +361,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B8A98F5B18BA602F26449FADDB0709C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE7160024EF9895B830BF77EAAC0EBD9 /* CATCoreNavigationController.m in Sources */,
+				B73826F8983018EBB0CCC0D9FD72256D /* CATNavigationBar.m in Sources */,
+				6C249399128326CD912D364358044AFB /* CATNavigationController-dummy.m in Sources */,
+				E96A724D8671C5939E5795671EE7A12E /* CATNavigationTransitioningAnimationDefault.m in Sources */,
+				FCBA4F2F33B0A0A1DDF29119118FF2BE /* CATNavigationViewController.m in Sources */,
+				72C5FD2E6F9B54C018BD7FD2E2599B08 /* CATWrapViewController.m in Sources */,
+				D12CC0530648899C4953F4EFCA39F845 /* UIImage+CATOO.m in Sources */,
+				DC657258FBFB0D87968D689A66FB2B6D /* UINavigationBar+CATCustom.m in Sources */,
+				A31EFF510C5562562002C550BDF548B4 /* UINavigationController+CATCustom.m in Sources */,
+				FD45B989165DF440FA6ABB1AE69BE504 /* UINavigationItem+CATCustom.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0FE09C45257F7C50E9071B3CAE283A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D709FD93B34130DF1F26C9642F87A598 /* Pods-CATNavigationController_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C4390DA4D22D492038388D2289FCE206 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD2750E6E71E2471E1906490E25D0AB9 /* CATNavigationController-dummy.m in Sources */,
-				BDA0466F1D116D7C000F3B61 /* CATNavigationTransitioningAnimationDefault.m in Sources */,
-				602AB85709096241A9C739B51A33D767 /* CATNavigationViewController.m in Sources */,
-				BDA046671D1168AF000F3B61 /* UINavigationItem+CATCustom.m in Sources */,
-				BDA0466B1D116A62000F3B61 /* UINavigationController+CATCustom.m in Sources */,
-				CDE07FF841C6E3CFD19D1CFEBB39D2F6 /* UINavigationBar+CATCustom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +392,7 @@
 		59216A5A84667CA8BF9F5DF5037B0AC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CATNavigationController;
-			target = 8794074A70A7AE4B5183D4183296894E /* CATNavigationController */;
+			target = 2395D70293A42D44EE757AB1FA8528E7 /* CATNavigationController */;
 			targetProxy = FAF7335BD7F2697BC1D633689E433244 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -425,28 +457,7 @@
 			};
 			name = Release;
 		};
-		53577EE996EAB7F82C24E61B7366ECA7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42EE6D9761DD241778BB268AB2BAC7C0 /* CATNavigationController.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CATNavigationController/CATNavigationController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		5E90D1DD52FDB67F3FC8A21108B0DD3F /* Debug */ = {
+		16E762B035ABCB17DB1317D73D14F567 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42EE6D9761DD241778BB268AB2BAC7C0 /* CATNavigationController.xcconfig */;
 			buildSettings = {
@@ -466,6 +477,27 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
+		};
+		590CB568DC5DFE5C905744036996A178 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42EE6D9761DD241778BB268AB2BAC7C0 /* CATNavigationController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CATNavigationController/CATNavigationController-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
 		};
 		6151053C57AC255EDE35180CDF801952 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -584,11 +616,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4CEEAB00E7E3910BD22C09AA9E7DACC0 /* Build configuration list for PBXNativeTarget "CATNavigationController" */ = {
+		47C331BBFAE7D727E183123210AC624E /* Build configuration list for PBXNativeTarget "CATNavigationController" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5E90D1DD52FDB67F3FC8A21108B0DD3F /* Debug */,
-				53577EE996EAB7F82C24E61B7366ECA7 /* Release */,
+				16E762B035ABCB17DB1317D73D14F567 /* Debug */,
+				590CB568DC5DFE5C905744036996A178 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

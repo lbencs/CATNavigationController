@@ -23,6 +23,9 @@
 		8574001F4F0F88D7791E4EB1 /* libPods-CATNavigationController_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D95567263F61B08C266CC3 /* libPods-CATNavigationController_Tests.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A38DA841D9F90E4B6CD34DE7 /* libPods-CATNavigationController_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 098B59F74FDEB446DD1390EF /* libPods-CATNavigationController_Example.a */; };
+		BDA046761D1269B9000F3B61 /* CATDogChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA046751D1269B9000F3B61 /* CATDogChildViewController.m */; };
+		BDA046791D127594000F3B61 /* CATChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA046781D127594000F3B61 /* CATChildViewController.m */; };
+		BDA0467B1D127701000F3B61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDA0467A1D127701000F3B61 /* LaunchScreen.storyboard */; };
 		BDA97D581D11462C00CA862A /* CATDogTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA97D571D11462C00CA862A /* CATDogTabViewController.m */; };
 		BDA97D5B1D11480000CA862A /* CATCatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA97D5A1D11480000CA862A /* CATCatTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -65,6 +68,11 @@
 		A4EA8F093C61DA2834738AF4 /* Pods-CATNavigationController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CATNavigationController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CATNavigationController_Example/Pods-CATNavigationController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B60FF063B9DA101AF3C64103 /* Pods-CATNavigationController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CATNavigationController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CATNavigationController_Tests/Pods-CATNavigationController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BCF3885C7F8D9CEB791CD49A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		BDA046741D1269B9000F3B61 /* CATDogChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CATDogChildViewController.h; path = ../CATDogChildViewController.h; sourceTree = "<group>"; };
+		BDA046751D1269B9000F3B61 /* CATDogChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CATDogChildViewController.m; path = ../CATDogChildViewController.m; sourceTree = "<group>"; };
+		BDA046771D127594000F3B61 /* CATChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATChildViewController.h; sourceTree = "<group>"; };
+		BDA046781D127594000F3B61 /* CATChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATChildViewController.m; sourceTree = "<group>"; };
+		BDA0467A1D127701000F3B61 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDA97D561D11462C00CA862A /* CATDogTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATDogTabViewController.h; sourceTree = "<group>"; };
 		BDA97D571D11462C00CA862A /* CATDogTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATDogTabViewController.m; sourceTree = "<group>"; };
 		BDA97D591D11480000CA862A /* CATCatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATCatTableViewController.h; sourceTree = "<group>"; };
@@ -138,15 +146,20 @@
 			children = (
 				6003F59C195388D20070C39A /* CATAppDelegate.h */,
 				6003F59D195388D20070C39A /* CATAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* CATViewController.h */,
 				6003F5A6195388D20070C39A /* CATViewController.m */,
-				6003F5A8195388D20070C39A /* Images.xcassets */,
-				6003F594195388D20070C39A /* Supporting Files */,
+				BDA046771D127594000F3B61 /* CATChildViewController.h */,
+				BDA046781D127594000F3B61 /* CATChildViewController.m */,
 				BDA97D561D11462C00CA862A /* CATDogTabViewController.h */,
 				BDA97D571D11462C00CA862A /* CATDogTabViewController.m */,
+				BDA046741D1269B9000F3B61 /* CATDogChildViewController.h */,
+				BDA046751D1269B9000F3B61 /* CATDogChildViewController.m */,
 				BDA97D591D11480000CA862A /* CATCatTableViewController.h */,
 				BDA97D5A1D11480000CA862A /* CATCatTableViewController.m */,
+				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				6003F5A8195388D20070C39A /* Images.xcassets */,
+				6003F594195388D20070C39A /* Supporting Files */,
+				BDA0467A1D127701000F3B61 /* LaunchScreen.storyboard */,
 			);
 			name = "Example for CATNavigationController";
 			path = CATNavigationController;
@@ -287,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				BDA0467B1D127701000F3B61 /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -401,10 +415,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* CATAppDelegate.m in Sources */,
+				BDA046761D1269B9000F3B61 /* CATDogChildViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* CATViewController.m in Sources */,
 				BDA97D5B1D11480000CA862A /* CATCatTableViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				BDA97D581D11462C00CA862A /* CATDogTabViewController.m in Sources */,
+				BDA046791D127594000F3B61 /* CATChildViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

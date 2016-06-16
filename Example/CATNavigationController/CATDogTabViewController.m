@@ -7,6 +7,7 @@
 //
 
 #import "CATDogTabViewController.h"
+#import "CATDogChildViewController.h"
 #import "UINavigationBar+CATCustom.h"
 
 @interface CATDogTabViewController ()
@@ -21,19 +22,25 @@
 	self.title = @"More";
 	
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+	[self.navigationController.navigationBar at_setBottomLineColor:[UIColor redColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-	
+	[self.navigationController setNavigationBarHidden:NO animated:animated];
+	self.navigationController.tabBarController.tabBar.hidden = NO;
+
 	[self.navigationController.navigationBar at_setBackgroundColor:[UIColor whiteColor]];
-	
+//	self.hidesBottomBarWhenPushed = YES;
+//	self.tabBarController.tabBar.hidden = NO;
+//	self.tabBarController.hidesBottomBarWhenPushed = YES;
 //	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //		[self.navigationController.navigationBar at_undo];
 //	});
 }
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
+//	self.accessibilityElementsHidden = NO;
 	[self.navigationController.navigationBar at_undo];
 }
 - (void)didReceiveMemoryWarning {
@@ -60,7 +67,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSLog(@"%@",self.navigationController);
-	UIViewController *nvc = [[UIViewController alloc] init];
+	CATDogChildViewController *nvc = [[CATDogChildViewController alloc] init];
 	nvc.view.backgroundColor = [UIColor yellowColor];
 	[self.navigationController pushViewController:nvc animated:YES];
 }
