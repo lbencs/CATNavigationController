@@ -1,18 +1,18 @@
 //
-//  CATTableViewController.m
+//  CATCatTableViewController.m
 //  CATNavigationController
 //
 //  Created by lben on 6/15/16.
 //  Copyright © 2016 lbencs. All rights reserved.
 //
 
-#import "CATTableViewController.h"
+#import "CATCatTableViewController.h"
 
-@interface CATTableViewController ()
+@interface CATCatTableViewController ()
 
 @end
 
-@implementation CATTableViewController
+@implementation CATCatTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

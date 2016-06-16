@@ -1,4 +1,4 @@
-use_frameworks!
+#use_frameworks!
 
 target 'CATNavigationController_Example' do
   pod 'CATNavigationController', :path => '../'
@@ -6,6 +6,6 @@ target 'CATNavigationController_Example' do
   target 'CATNavigationController_Tests' do
     inherit! :search_paths
 
-    pod 'FBSnapshotTestCase'
+#    pod 'FBSnapshotTestCase'
   end
 end

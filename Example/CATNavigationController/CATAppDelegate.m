@@ -7,12 +7,51 @@
 //
 
 #import "CATAppDelegate.h"
+#import "CATViewController.h"
+#import "CATDogTabViewController.h"
+#import "CATCatTableViewController.h"
+#import <CATNavigationController/CATNavigationViewController.h>
 
 @implementation CATAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+	UIImage *image = [UIImage imageNamed:@"comment_ico_back_pre"];
+	image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+	[[UINavigationBar appearance] setBackIndicatorImage:image];
+	
+	image = [UIImage imageNamed:@"comment_ico_back_normal"];
+	image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:image];
+	
+	UITabBarController *tvc = [[UITabBarController alloc] init];
+	UITabBarItem *item1 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
+	item1.title = @"History";
+	CATViewController *vc1 = [[CATViewController alloc] init];
+	CATNavigationViewController *nvc1 = [[CATNavigationViewController alloc] initWithRootViewController:vc1];
+	nvc1.tabBarItem = item1;
+	
+	UITabBarItem *item2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1];
+	item2.title = @"More";
+	CATDogTabViewController *vc2 = [[CATDogTabViewController alloc] init];
+	CATNavigationViewController *nvc2 = [[CATNavigationViewController alloc] initWithRootViewController:vc2];
+	nvc2.tabBarItem = item2;
+	
+	UITabBarItem *item3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemSearch tag:2];
+	item3.title = @"Search";
+	CATCatTableViewController *vc3 = [[CATCatTableViewController alloc] init];
+	vc3.tabBarItem = item3;
+	CATNavigationViewController *nvc3 = [[CATNavigationViewController alloc] initWithRootViewController:vc3];
+	
+	tvc.viewControllers = @[nvc1,nvc2,nvc3];
+	
+	UIWindow *keyWindow = [[UIWindow alloc] init];
+	[keyWindow makeKeyAndVisible];
+	keyWindow.rootViewController = tvc;
+	
+	self.window = keyWindow;
+	
     return YES;
 }
 

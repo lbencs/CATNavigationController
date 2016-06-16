@@ -1,5 +1,5 @@
 //
-//  CATTabViewController.h
+//  CATDogTabViewController.h
 //  CATNavigationController
 //
 //  Created by lben on 6/15/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CATTabViewController : UIViewController
+@interface CATDogTabViewController : UITableViewController
 
 @end

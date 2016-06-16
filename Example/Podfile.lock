@@ -1,0 +1,16 @@
+PODS:
+  - CATNavigationController (0.1.0)
+
+DEPENDENCIES:
+  - CATNavigationController (from `../`)
+
+EXTERNAL SOURCES:
+  CATNavigationController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CATNavigationController: 0bbff7b537b0efd828dcc21f5e9c82d9efb85592
+
+PODFILE CHECKSUM: 24cb956cb6639014e6bb8eb9c73a6e7ba5ea103a
+
+COCOAPODS: 1.0.0

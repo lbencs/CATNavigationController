@@ -1,5 +1,5 @@
 //
-//  CATTableViewController.h
+//  CATCatTableViewController.h
 //  CATNavigationController
 //
 //  Created by lben on 6/15/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CATTableViewController : UITableViewController
+@interface CATCatTableViewController : UITableViewController
 
 @end

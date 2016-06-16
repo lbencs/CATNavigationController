@@ -10,4 +10,8 @@
 
 @implementation UINavigationController (CATCustom)
 
+- (void)at_hiddenBottomLine{
+}
+- (void)at_showBottomLine{
+}
 @end

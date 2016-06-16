@@ -8,6 +8,5 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CATNavigationTransitioningAnimationDefault : NSObject
-
+@interface CATNavigationTransitioningAnimationDefault : NSObject<UIViewControllerAnimatedTransitioning>
 @end

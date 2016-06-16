@@ -9,5 +9,4 @@
 #import "UINavigationItem+CATCustom.h"
 
 @implementation UINavigationItem (CATCustom)
-
 @end
