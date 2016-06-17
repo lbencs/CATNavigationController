@@ -10,6 +10,10 @@
 
 @interface UINavigationController (CATCustom)
 
+- (void)at_fullScreenPushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
+- (void)at_fullScreen;
+
 - (void)at_hiddenBottomLine;
 - (void)at_showBottomLine;
 @end

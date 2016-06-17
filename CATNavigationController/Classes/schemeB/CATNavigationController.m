@@ -1,45 +1,46 @@
 //
-//  CATNavigationViewController.m
+//  CATNavigationController.m
 //  Pods
 //
 //  Created by lben on 6/15/16.
 //
 //
 
-#import "CATNavigationViewController.h"
+#import "CATNavigationController.h"
 #import "CATCoreNavigationController.h"
 #import "CATWrapViewController.h"
 #import "CATNavigationTransitioningAnimationDefault.h"
+#import "CATPopTransitionAnimation.h"
+#import "CATPushTransitionAnimation.h"
+#import "CATProvider.h"
 
-@interface CATNavigationViewController ()<UINavigationControllerDelegate>
+@interface CATNavigationController ()<UINavigationControllerDelegate>
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactivePopTransition;
 @property (nonatomic, weak) UIPanGestureRecognizer *popRecognizer;
 
 @end
 
-@implementation CATNavigationViewController
+@implementation CATNavigationController
 
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
-	if (self = [super init]) {
-		self.viewControllers = @[[CATWrapViewController wrapWithViewController:rootViewController]];
-	}
-	return self;
-}
-- (instancetype)initWithCoder:(NSCoder *)aDecoder{
-	if (self = [super initWithCoder:aDecoder]) {
-		self.viewControllers = @[[CATWrapViewController wrapWithViewController:self.viewControllers.firstObject]];
-	}
-	return self;
-}
+//- (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
+//	if (self = [super init]) {
+//		self.viewControllers = @[[CATWrapViewController wrapWithViewController:rootViewController]];
+//	}
+//	return self;
+//}
+//- (instancetype)initWithCoder:(NSCoder *)aDecoder{
+//	if (self = [super initWithCoder:aDecoder]) {
+//		self.viewControllers = @[[CATWrapViewController wrapWithViewController:self.viewControllers.firstObject]];
+//	}
+//	return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-	[self setNavigationBarHidden:YES];
-//	self.delegate = self;
-//	
+	self.delegate = self;
 //
-#if 0
+//
 	UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
 	gesture.enabled = NO;
 	UIView *gestureView = gesture.view;
@@ -54,9 +55,12 @@
 	id target = gesture.delegate;
 	SEL action = NSSelectorFromString(@"handleNavigationTransition:");
 //	popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
+#if 0
 	[popRecognizer addTarget:target action:action];
-	popRecognizer.maximumNumberOfTouches = 1;
+#else
+	[popRecognizer addTarget:self action:@selector(handleControllerPop:)];
 #endif
+	popRecognizer.maximumNumberOfTouches = 1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,6 +89,17 @@
 }
 - (void)at_pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
 	return [super pushViewController:viewController animated:animated];
+}
+
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+	
+	[[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:self.tabBarController.view]];
+	
+	[super pushViewController:viewController animated:animated];
+}
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated{
+	return [super popViewControllerAnimated:animated];
 }
 
 //- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
@@ -130,6 +145,7 @@
 		 */
 		if (progress > 0.5) {
 			[self.interactivePopTransition finishInteractiveTransition];
+			[[CATPageManager shareManager] pop];
 		}
 		else {
 			[self.interactivePopTransition cancelInteractiveTransition];
@@ -156,24 +172,43 @@
 //	return nil;
 //}
 
-//- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
-//	if (operation == UINavigationControllerOperationPop) {
-//		NSLog(@"pop");
-//		return [[CATNavigationTransitioningAnimationDefault alloc] init];
-//	}else if (operation = UINavigationControllerOperationPush){
-//		NSLog(@"push");
-//	}else if (operation == UINavigationControllerOperationNone){
-//		NSLog(@"none");
-//	}
-//	return nil;
-//}
-//
-//- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
-//	if ([animationController isKindOfClass:[CATNavigationTransitioningAnimationDefault class]]) {
-//		return self.interactivePopTransition;
-//	}
-//	return nil;
-//}
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
+	if (operation == UINavigationControllerOperationPop) {
+		NSLog(@"pop");
+		return [[CATPopTransitionAnimation alloc] init];
+	}else if (operation = UINavigationControllerOperationPush){
+		NSLog(@"push");
+		return [[CATPushTransitionAnimation alloc] init];
+	}else if (operation == UINavigationControllerOperationNone){
+		NSLog(@"none");
+	}
+	return nil;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+	if ([animationController isKindOfClass:[CATPopTransitionAnimation class]]) {
+		return self.interactivePopTransition;
+	}else if ([animationController isKindOfClass:[CATPushTransitionAnimation class]]){
+		return nil;
+	}
+	return nil;
+}
+
+
+- (UIInterfaceOrientationMask)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController{
+	return UIInterfaceOrientationMaskAll;
+}
+- (UIInterfaceOrientation)navigationControllerPreferredInterfaceOrientationForPresentation:(UINavigationController *)navigationController{
+	return UIInterfaceOrientationMaskAll;
+}
+
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+	
+}
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+}
+
 
 /*
 #pragma mark - Navigation

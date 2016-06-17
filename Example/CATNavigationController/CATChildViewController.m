@@ -17,7 +17,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor whiteColor];
+	self.view.backgroundColor = [UIColor blueColor];
+	
+	UIToolbar *toolBar = [[UIToolbar alloc] init];
+	
+	toolBar.frame = CGRectMake(CGRectGetHeight(self.view.frame) - 40,
+							   100,
+							   CGRectGetWidth([UIScreen mainScreen].bounds),
+							   40);
+	
+//	UIBarButtonItem *item = [[UIBarButtonItem alloc] initwith]
+	toolBar.backgroundColor = [UIColor redColor];
+	[self.view addSubview:toolBar];
 }
 
 - (void)didReceiveMemoryWarning {

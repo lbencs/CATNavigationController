@@ -11,47 +11,71 @@
 #import "CATDogTabViewController.h"
 #import "CATCatTableViewController.h"
 #import "CATCoreNavigationController.h"
-#import <CATNavigationController/CATNavigationViewController.h>
+#import "CATWrapViewController.h"
+#import <CATNavigationController/CATNavigationController.h>
+
+#define A (0)
 
 @implementation CATAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-	UIImage *image = [UIImage imageNamed:@"comment_ico_back_pre"];
-	image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
-	[[UINavigationBar appearance] setBackIndicatorImage:image];
 	
-	image = [UIImage imageNamed:@"comment_ico_back_normal"];
-	image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:image];
+	UIWindow *keyWindow = [[UIWindow alloc] init];
+	[keyWindow makeKeyAndVisible];
+	
+	
+//	UIImage *image = [UIImage imageNamed:@"comment_ico_back_pre"];
+//	image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+//	[[UINavigationBar appearance] setBackIndicatorImage:image];
+//	
+//	image = [UIImage imageNamed:@"comment_ico_back_normal"];
+//	image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:image];
 	
 	UITabBarController *tvc = [[UITabBarController alloc] init];
 	UITabBarItem *item1 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
 	item1.title = @"Cat";
 	CATViewController *vc1 = [[CATViewController alloc] init];
-	CATNavigationViewController *nvc1 = [[CATNavigationViewController alloc] initWithRootViewController:vc1];
-	nvc1.tabBarItem = item1;
 	
 	UITabBarItem *item2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1];
+	item2.title = @"Dog";
 	CATDogTabViewController *vc2 = [[CATDogTabViewController alloc] init];
-	CATNavigationViewController *nvc2 = [[CATNavigationViewController alloc] initWithRootViewController:vc2];
-	nvc2.tabBarItem = item2;
-	nvc2.title = @"Dog";
 	
 	UITabBarItem *item3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:2];
 	CATCatTableViewController *vc3 = [[CATCatTableViewController alloc] init];
-	CATNavigationViewController *nvc3 = [[CATNavigationViewController alloc] initWithRootViewController:vc3];
-	nvc3.title = @"CCat";
+	item3.title = @"CCat";
+	
+#if A
+	CATWrapNavigationController *nvc1 = [[CATWrapNavigationController alloc] initWithRootViewController:vc1];
+	nvc1.tabBarItem = item1;
+	
+	CATWrapNavigationController *nvc2 = [[CATWrapNavigationController alloc] initWithRootViewController:vc2];
+	nvc2.tabBarItem = item2;
+	
+	CATWrapNavigationController *nvc3 = [[CATWrapNavigationController alloc] initWithRootViewController:vc3];
 	nvc3.tabBarItem = item3;
 	
-	tvc.viewControllers = @[nvc3,nvc1,nvc2];
+	tvc.viewControllers = @[nvc1,nvc2,nvc3];
 	
 	CATCoreNavigationController *corNvc = [[CATCoreNavigationController alloc] initWithRootViewController:tvc];
 	
-	UIWindow *keyWindow = [[UIWindow alloc] init];
-	[keyWindow makeKeyAndVisible];
 	keyWindow.rootViewController = corNvc;
+#else
+	CATNavigationController *nvc1 = [[CATNavigationController alloc] initWithRootViewController:vc1];
+	nvc1.tabBarItem = item1;
+	
+	CATNavigationController *nvc2 = [[CATNavigationController alloc] initWithRootViewController:vc2];
+	nvc2.tabBarItem = item2;
+	
+	CATNavigationController *nvc3 = [[CATNavigationController alloc] initWithRootViewController:vc3];
+	nvc3.tabBarItem = item3;
+	
+	tvc.viewControllers = @[nvc1,nvc2,nvc3];
+	
+	keyWindow.rootViewController = tvc;
+#endif
 	
 	self.window = keyWindow;
 	

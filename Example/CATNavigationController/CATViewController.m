@@ -25,8 +25,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-	[self.navigationController.navigationBar at_setBackgroundColor:[UIColor blueColor]];
 	[self.navigationController.navigationBar at_setBottomLineColor:[UIColor redColor]];
+	[self.navigationController.navigationBar at_setBackgroundColor:[UIColor blueColor]];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 	

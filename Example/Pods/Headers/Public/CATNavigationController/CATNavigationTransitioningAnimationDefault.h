@@ -1,1 +1,1 @@
-../../../../../CATNavigationController/Classes/CATNavigationTransitioningAnimationDefault.h
+../../../../../CATNavigationController/Classes/Animations/CATNavigationTransitioningAnimationDefault.h

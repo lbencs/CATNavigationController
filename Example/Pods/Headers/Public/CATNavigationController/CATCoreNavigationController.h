@@ -1,1 +1,1 @@
-../../../../../CATNavigationController/Classes/CATCoreNavigationController.h
+../../../../../CATNavigationController/Classes/schemeA/CATCoreNavigationController.h

@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	self.view.backgroundColor = [UIColor whiteColor];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -27,14 +28,12 @@
 	self.title = @"Search";
 }
 
-//- (void)viewWillAppear:(BOOL)animated{
-//	[super viewWillAppear:animated];
-////	[self.navigationController setNavigationBarHidden:YES animated:animated];
-//}
-//- (void)viewWillDisappear:(BOOL)animated{
-//	[super viewWillDisappear:animated];
-////	[self.navigationController setNavigationBarHidden:NO animated:animated];
-//}
+- (void)viewWillAppear:(BOOL)animated{
+	[super viewWillAppear:animated];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+	[super viewWillDisappear:animated];
+}
 
 
 - (void)didReceiveMemoryWarning {

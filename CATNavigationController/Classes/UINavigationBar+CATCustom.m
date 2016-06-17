@@ -7,7 +7,7 @@
 //
 
 #import "UINavigationBar+CATCustom.h"
-#import "UIImage+CATOO.h"
+#import "CATProvider.h"
 #import <objc/runtime.h>
 
 extern NSInteger const kCATCustomExcludeAlphaTag = 999012;

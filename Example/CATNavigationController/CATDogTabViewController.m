@@ -68,8 +68,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSLog(@"%@",self.navigationController);
 	CATDogChildViewController *nvc = [[CATDogChildViewController alloc] init];
-	nvc.view.backgroundColor = [UIColor yellowColor];
-	[self.navigationController pushViewController:nvc animated:YES];
+	if (indexPath.row == 0) {
+		[self.navigationController  pushViewController:nvc animated:YES];
+	}else{
+		nvc.view.backgroundColor = [UIColor yellowColor];
+		[self.navigationController pushViewController:nvc animated:YES];
+	}
 }
 
 /*
