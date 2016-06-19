@@ -8,7 +8,7 @@
 
 #import "CATChildViewController.h"
 #import "UINavigationBar+CATCustom.h"
-
+#import "UIViewController+CATNavigationController.h"
 @interface CATChildViewController ()
 
 @end

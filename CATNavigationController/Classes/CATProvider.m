@@ -31,6 +31,7 @@
 	if (objc) {
 		[self.pages addObject:objc];
 	}
+    NSLog(@"Push:%@",self.pages);
 }
 - (UIImage *)firstObjc{
 	return [self.pages firstObject];
@@ -40,6 +41,7 @@
 	if (img) {
 		[self.pages removeObject:img];
 	}
+    NSLog(@"Pop: %@",self.pages);
 	return img;
 }
 

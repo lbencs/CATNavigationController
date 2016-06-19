@@ -11,12 +11,15 @@
 
 @implementation CATPopTransitionAnimation
 
+
 - (CGFloat)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
 	return 0.25;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext{
 	
+    [super animateTransition:transitionContext];
+    
 	UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
 	UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
 	
@@ -44,12 +47,11 @@
 	[containerView insertSubview:toVcCover belowSubview:fromVC.view];
 	[containerView insertSubview:bottomView belowSubview:toVcCover];
 	
-	toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.85, 0.85);
+	toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.95);
 	
 	[toVC.navigationController setNavigationBarHidden:YES];
 	toVC.tabBarController.tabBar.hidden = YES;
-	
-	[UIView animateWithDuration:duration
+ 	[UIView animateWithDuration:duration
 					 animations:^{
 						 fromVC.view.transform = CGAffineTransformMakeTranslation(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
 						 toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
@@ -61,9 +63,6 @@
 						 toVC.tabBarController.tabBar.hidden = NO;
 						 [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
 					 }];
-}
-
-- (void)animationEnded:(BOOL)transitionCompleted{
 }
 
 @end

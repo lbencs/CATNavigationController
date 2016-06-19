@@ -7,6 +7,7 @@
 //
 
 #import "CATDogChildViewController.h"
+#import "UIViewController+CATNavigationController.h"
 
 @interface CATDogChildViewController ()
 
@@ -16,13 +17,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.at_hiddenNavigationBar = YES;
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(100, 100, 100, 44);
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
+    [button addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)btnClick:(UIButton *)sender{
+    UIViewController *vc = [[UIViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-	[self.navigationController setNavigationBarHidden:YES animated:animated];
-	self.navigationController.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

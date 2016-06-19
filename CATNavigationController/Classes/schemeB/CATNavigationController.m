@@ -13,27 +13,27 @@
 #import "CATPopTransitionAnimation.h"
 #import "CATPushTransitionAnimation.h"
 #import "CATProvider.h"
+#import "UIViewController+CATNavigationController.h"
+
+typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
+    CATNavigationPopAnimationPop,
+    CATNavigationPopAnimationDrag,
+    CATNavigationPopAnimationDragCalcelled,
+    CATNavigationPopAnimationDragFinished
+};
+
 
 @interface CATNavigationController ()<UINavigationControllerDelegate>
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactivePopTransition;
 @property (nonatomic, weak) UIPanGestureRecognizer *popRecognizer;
 
+
+@property (nonatomic, assign) CATNavigationPopAnimation popAnimation;
+
+
 @end
 
 @implementation CATNavigationController
-
-//- (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
-//	if (self = [super init]) {
-//		self.viewControllers = @[[CATWrapViewController wrapWithViewController:rootViewController]];
-//	}
-//	return self;
-//}
-//- (instancetype)initWithCoder:(NSCoder *)aDecoder{
-//	if (self = [super initWithCoder:aDecoder]) {
-//		self.viewControllers = @[[CATWrapViewController wrapWithViewController:self.viewControllers.firstObject]];
-//	}
-//	return self;
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,11 +50,8 @@
 	popRecognizer.maximumNumberOfTouches = 1;
 	[gestureView addGestureRecognizer:popRecognizer];
 	
-//	[popRecognizer addTarget:self action:@selector(handleControllerPop:)];
-	
 	id target = gesture.delegate;
 	SEL action = NSSelectorFromString(@"handleNavigationTransition:");
-//	popRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
 #if 0
 	[popRecognizer addTarget:target action:action];
 #else
@@ -94,20 +91,31 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
 	
-	[[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:self.tabBarController.view]];
+    if (self.tabBarController) {
+        [[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:self.tabBarController.view]];
+    }else if(self.navigationController){
+        [[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:self.navigationController]];
+    }else{
+//        [[CATPageManager shareManager] ]
+    }
 	
+//    [[[UIAlertView alloc] initWithTitle:@"title" message:@"message" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil] show];
+    
 	[super pushViewController:viewController animated:animated];
 }
+
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated{
-	return [super popViewControllerAnimated:animated];
+//    [CATransaction begin];
+//    [CATransaction setCompletionBlock:^{
+//        NSLog(@"%@",@"Pop Finished");
+//        [[CATPageManager shareManager] pop];
+//    }];
+   UIViewController *vc = [super popViewControllerAnimated:animated];
+//    [CATransaction commit];
+    
+    return vc;
 }
 
-//- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//	[[CATCoreNavigationController shareNavigationController] pushViewController:[CATWrapViewController wrapWithViewController:viewController] animated:animated];
-//}
-//- (UIViewController *)popViewControllerAnimated:(BOOL)animated{
-//	return [[CATCoreNavigationController shareNavigationController] popViewControllerAnimated:animated];
-//}
 
 /**
  *  我们把用户的每次Pan手势操作作为一次pop动画的执行
@@ -126,7 +134,8 @@
 		 *  手势开始，新建一个监控对象
 		 */
 		self.interactivePopTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
-		/**
+        _popAnimation = CATNavigationPopAnimationDrag;
+        /**
 		 *  告诉控制器开始执行pop的动画
 		 */
 		[self popViewControllerAnimated:YES];
@@ -144,16 +153,16 @@
 		 *  手势结束时如果进度大于一半，那么就完成pop操作，否则重新来过。
 		 */
 		if (progress > 0.5) {
-			[self.interactivePopTransition finishInteractiveTransition];
-			[[CATPageManager shareManager] pop];
-		}
+            _popAnimation = CATNavigationPopAnimationDragFinished;
+            [self.interactivePopTransition finishInteractiveTransition];
+        }
 		else {
+            _popAnimation = CATNavigationPopAnimationDragCalcelled;
 			[self.interactivePopTransition cancelInteractiveTransition];
 		}
 		
 		self.interactivePopTransition = nil;
 	}
-
 }
 
 
@@ -175,10 +184,27 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC{
 	if (operation == UINavigationControllerOperationPop) {
 		NSLog(@"pop");
-		return [[CATPopTransitionAnimation alloc] init];
+        return [[CATPopTransitionAnimation alloc] initWithBegin:^(id<UIViewControllerContextTransitioning> transitionContext) {
+        
+        } completion:^{
+            
+            if (_popAnimation == CATNavigationPopAnimationDragFinished ||
+                _popAnimation == CATNavigationPopAnimationPop) {
+                
+                [[CATPageManager shareManager] pop];
+                _popAnimation = CATNavigationPopAnimationPop;
+            }
+            
+        }];
 	}else if (operation = UINavigationControllerOperationPush){
 		NSLog(@"push");
-		return [[CATPushTransitionAnimation alloc] init];
+		return [[CATPushTransitionAnimation alloc] initWithBegin:^(id<UIViewControllerContextTransitioning> transitionContext) {
+        } completion:^{
+            [toVC.navigationController setNavigationBarHidden:toVC.at_hiddenNavigationBar];
+            toVC.tabBarController.tabBar.hidden = !toVC.at_showTabBar;
+        }];
+        
+        return nil;
 	}else if (operation == UINavigationControllerOperationNone){
 		NSLog(@"none");
 	}

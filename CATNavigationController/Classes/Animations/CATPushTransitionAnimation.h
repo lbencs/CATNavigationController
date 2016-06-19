@@ -6,8 +6,8 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import "CATTransitionAnimation.h"
 
-@interface CATPushTransitionAnimation : NSObject <UIViewControllerAnimatedTransitioning>
+@interface CATPushTransitionAnimation : CATTransitionAnimation
 
 @end

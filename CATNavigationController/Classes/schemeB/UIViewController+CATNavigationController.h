@@ -10,6 +10,7 @@
 
 @interface UIViewController (CATNavigationController)
 
-@property (nonatomic, assign) BOOL at_no;
+@property (nonatomic, assign, setter=at_setHiddenNavigationBar:) BOOL at_hiddenNavigationBar;
+@property (nonatomic, assign, setter=at_setShowTabBar:) BOOL at_showTabBar;
 
 @end
