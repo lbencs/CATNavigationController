@@ -68,8 +68,9 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	return YES;
 }
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+	
 	CGPoint beginningLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
-	CGFloat maxAllowedInitialDistance = 200;
+	CGFloat maxAllowedInitialDistance = self.at_interactiveMinMoveDistance;
 	if (maxAllowedInitialDistance > 0 && beginningLocation.x > maxAllowedInitialDistance) {
 		return NO;
 	}
@@ -120,6 +121,39 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	return UIInterfaceOrientationMaskAll;
 }
 
+#pragma mark - private methods
+
+- (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer {
+	
+	CGFloat progress = [recognizer translationInView:recognizer.view].x / recognizer.view.bounds.size.width;
+	
+	progress = MIN(1.0, MAX(0.0, progress));
+	
+	if (recognizer.state == UIGestureRecognizerStateBegan) {
+		
+		self.interactivePopTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
+		
+		_popAnimation = CATNavigationPopAnimationDrag;
+		
+		[self popViewControllerAnimated:YES];
+		
+	}else if (recognizer.state == UIGestureRecognizerStateChanged) {
+		
+		[self.interactivePopTransition updateInteractiveTransition:progress];
+		
+	}else if (recognizer.state == UIGestureRecognizerStateEnded ||
+			  recognizer.state == UIGestureRecognizerStateCancelled) {
+		
+		if (progress > 0.5) {
+			_popAnimation = CATNavigationPopAnimationDragFinished;
+			[self.interactivePopTransition finishInteractiveTransition];
+		}else {
+			_popAnimation = CATNavigationPopAnimationDragCalcelled;
+			[self.interactivePopTransition cancelInteractiveTransition];
+		}
+		self.interactivePopTransition = nil;
+	}
+}
 @end
 
 
@@ -236,8 +270,8 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	
 	[self.tabBarController.tabBar setHidden:!self.at_showTabBar];
 	
-	CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
-	navigationController.customPopGestureRecognizer.enabled = self.at_ableInteractivePop;
+//	CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
+//	navigationController.customPopGestureRecognizer.enabled = self.at_ableInteractivePop;
 	
 	if (self.at_navigationBarBackgroundColor) {
 		[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
