@@ -11,11 +11,6 @@
 
 @implementation CATPopTransitionAnimation
 
-
-- (CGFloat)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
-	return 0.25;
-}
-
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext{
 	
     [super animateTransition:transitionContext];
@@ -28,10 +23,16 @@
 	
 	[containerView insertSubview:toVC.view belowSubview:fromVC.view];
 	
-	UINavigationBar *navBar = fromVC.navigationController.navigationBar;
+	//黑色背景
+	UIView *bottomView = [[UIView alloc] initWithFrame:containerView.bounds];
+	bottomView.backgroundColor = [UIColor blackColor];
+	[containerView insertSubview:bottomView belowSubview:fromVC.view];
 	
 	NSLog(@"%@",[NSDate date]);
-	UIImage *fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:fromVC.tabBarController.view];
+	UIImage *fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:toVC.tabBarController.view];
+	if (!fromVcScreenshot) {
+		fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:toVC.navigationController.view];
+	}
 	UIImage *toVcScreenshot = [[CATPageManager shareManager] firstObjc];
 	NSLog(@"%@",[NSDate date]);
 	
@@ -41,17 +42,16 @@
 	
 	UIImageView *toVcCover = [[UIImageView alloc] initWithImage:toVcScreenshot];
 	toVcCover.bounds = containerView.bounds;
-	
-	UIView *bottomView = [[UIView alloc] initWithFrame:containerView.bounds];
-	bottomView.backgroundColor = [UIColor blackColor];
 	[containerView insertSubview:toVcCover belowSubview:fromVC.view];
-	[containerView insertSubview:bottomView belowSubview:toVcCover];
 	
 	toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.95);
 	
-	[toVC.navigationController setNavigationBarHidden:YES];
-	toVC.tabBarController.tabBar.hidden = YES;
- 	[UIView animateWithDuration:duration
+	UINavigationBar *navigationBar = toVC.navigationController.navigationBar;
+	navigationBar.transform = CGAffineTransformMakeTranslation(0, -100);
+//	toVC.navigationController.navigationBar.
+	[toVC.tabBarController.tabBar at_setAlpha:0.0];
+	
+	[UIView animateWithDuration:duration
 					 animations:^{
 						 fromVC.view.transform = CGAffineTransformMakeTranslation(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
 						 toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
@@ -59,8 +59,8 @@
 						 [fromVcCover removeFromSuperview];
 						 [toVcCover removeFromSuperview];
 						 [bottomView removeFromSuperview];
-						 [toVC.navigationController setNavigationBarHidden:NO];
-						 toVC.tabBarController.tabBar.hidden = NO;
+						 navigationBar.transform = CGAffineTransformMakeTranslation(0,0);
+						 [toVC.tabBarController.tabBar at_setAlpha:1.0];
 						 [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
 					 }];
 }

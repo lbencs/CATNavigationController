@@ -9,6 +9,7 @@
 #import "CATDogTabViewController.h"
 #import "CATDogChildViewController.h"
 #import "UINavigationBar+CATCustom.h"
+#import "CATNavigationController.h"
 
 @interface CATDogTabViewController ()
 
@@ -20,7 +21,7 @@
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor whiteColor];
 	self.title = @"More";
-	
+	self.at_showTabBar = YES;
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
 	[self.navigationController.navigationBar at_setBottomLineColor:[UIColor redColor]];
 }
@@ -60,7 +61,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	cell.textLabel.text = [NSString stringWithFormat:@"%ld",indexPath.row];
+	cell.textLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
 	// Configure the cell...
 	
 	return cell;
@@ -69,10 +70,10 @@
 	NSLog(@"%@",self.navigationController);
 	CATDogChildViewController *nvc = [[CATDogChildViewController alloc] init];
 	if (indexPath.row == 0) {
-		[self.navigationController  pushViewController:nvc animated:YES];
+		[self.navigationController  at_pushViewController:nvc animated:YES];
 	}else{
 		nvc.view.backgroundColor = [UIColor yellowColor];
-		[self.navigationController pushViewController:nvc animated:YES];
+		[self.navigationController at_pushViewController:nvc animated:YES];
 	}
 }
 

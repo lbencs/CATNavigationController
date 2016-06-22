@@ -7,6 +7,7 @@
 //
 
 #import "CATCatTableViewController.h"
+#import "CATNavigationController.h"
 
 @interface CATCatTableViewController ()
 
@@ -17,15 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[self.navigationController setNavigationBarHidden:YES animated:NO];
 	self.view.backgroundColor = [UIColor whiteColor];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
 	self.title = @"Search";
+	self.at_hiddenNavigationBar = YES;
+	self.at_showTabBar = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -62,8 +59,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSLog(@"%@",self.navigationController);
 	UIViewController *nvc = [[UIViewController alloc] init];
-	nvc.view.backgroundColor = [UIColor redColor];
-	[self.navigationController pushViewController:nvc animated:YES];
+	nvc.view.backgroundColor = [UIColor whiteColor];
+	[self.navigationController at_pushViewController:nvc animated:YES];
 }
 
 /*

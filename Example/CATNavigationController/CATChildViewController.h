@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CATChildViewController : UIViewController
-
+@property (nonatomic, weak) CATChildViewController *topVC;
 @end

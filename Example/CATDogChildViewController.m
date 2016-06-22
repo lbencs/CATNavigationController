@@ -7,7 +7,7 @@
 //
 
 #import "CATDogChildViewController.h"
-#import "UIViewController+CATNavigationController.h"
+#import "CATNavigationController.h"
 
 @interface CATDogChildViewController ()
 
@@ -29,7 +29,8 @@
 
 - (void)btnClick:(UIButton *)sender{
     UIViewController *vc = [[UIViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+	vc.view.backgroundColor = [UIColor whiteColor];
+    [self.navigationController at_pushViewController:vc animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];

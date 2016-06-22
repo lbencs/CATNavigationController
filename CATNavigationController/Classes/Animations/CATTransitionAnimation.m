@@ -24,6 +24,8 @@
     return self;
 }
 
+#pragma mark - 
+
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext{
     return 0.25;
 }

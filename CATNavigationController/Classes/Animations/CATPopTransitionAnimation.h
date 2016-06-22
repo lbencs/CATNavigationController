@@ -6,8 +6,6 @@
 //
 //
 
-#import <Foundation/Foundation.h>
-
 #import "CATTransitionAnimation.h"
 
 @interface CATPopTransitionAnimation : CATTransitionAnimation

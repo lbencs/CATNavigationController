@@ -7,11 +7,32 @@
 //
 
 #import "CATProvider.h"
+#import <objc/runtime.h>
 
 @implementation CATProvider
 
 @end
 
+
+
+CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
+	
+	Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
+	Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);
+	
+	BOOL didAddMethod = class_addMethod(aClass,
+										originalSelector,
+										method_getImplementation(swizzledMethod),
+										method_getTypeEncoding(swizzledMethod));
+	if (didAddMethod) {
+		class_replaceMethod(aClass,
+							swizzledSelector,
+							method_getImplementation(originalMethod),
+							method_getTypeEncoding(originalMethod));
+	}else{
+		method_exchangeImplementations(originalMethod, swizzledMethod);
+	}
+}
 @interface CATPageManager ()
 @property (nonatomic, strong) NSMutableArray *pages;
 @end
@@ -34,10 +55,10 @@
     NSLog(@"Push:%@",self.pages);
 }
 - (UIImage *)firstObjc{
-	return [self.pages firstObject];
+	return [self.pages lastObject];
 }
 - (UIImage *)pop{
-	UIImage *img = [self.pages firstObject];
+	UIImage *img = [self.pages lastObject];
 	if (img) {
 		[self.pages removeObject:img];
 	}
@@ -78,3 +99,21 @@
 
 @end
 
+CATSubViewSetAlpha(CGFloat alpha, UIView *superView){
+	for (UIView *v in superView.subviews) {
+		v.alpha = alpha;
+		CATSubViewSetAlpha(alpha, v);
+	}
+}
+
+@implementation UINavigationBar (CAT)
+- (void)at_setAlpha:(CGFloat)alpha{
+	CATSubViewSetAlpha(alpha, self);
+}
+@end
+@implementation UITabBar (CAT)
+- (void)at_setAlpha:(CGFloat)alpha{
+	CATSubViewSetAlpha(alpha, self);
+}
+
+@end

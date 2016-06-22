@@ -8,6 +8,7 @@
 
 #import "CATViewController.h"
 #import "CATChildViewController.h"
+#import "CATNavigationController.h"
 #import "UINavigationBar+CATCustom.h"
 
 @interface CATViewController ()<UIScrollViewDelegate>
@@ -19,15 +20,18 @@
 	[super viewDidLoad];
 	self.title = @"History";
 	[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+	self.at_showTabBar = YES;
+	self.at_navigationBarBackgroundColor = [UIColor yellowColor];
+	self.at_navigationBarBottomLineColor = [UIColor redColor];
 }
 - (void)didReceiveMemoryWarning{
 	[super didReceiveMemoryWarning];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-	[self.navigationController.navigationBar at_setBottomLineColor:[UIColor redColor]];
-	[self.navigationController.navigationBar at_setBackgroundColor:[UIColor blueColor]];
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 	
 }
@@ -44,15 +48,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-	cell.textLabel.text = [NSString stringWithFormat:@"%ld",indexPath.row];
+	cell.textLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
 	// Configure the cell...
-	
 	return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSLog(@"%@",self.navigationController);
 	CATChildViewController *nvc = [[CATChildViewController alloc] init];
-	[self.navigationController pushViewController:nvc animated:YES];
+	[self.navigationController at_pushViewController:nvc animated:YES];
 }
 
 @end

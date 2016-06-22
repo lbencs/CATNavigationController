@@ -41,7 +41,7 @@ static char CATCustomEmptyImageKey;
 
 - (void)at_setBottomLineColor:(UIColor *)color{
 	[self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-	UIImage *line = [UIImage at_imageWithColor:color withSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0.5)];
+	UIImage *line = [UIImage at_imageWithColor:color withSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0.3)];
 	[self setShadowImage:[UIImage new]];
 	[self setShadowImage:line];
 }
@@ -84,8 +84,6 @@ static char CATCustomEmptyImageKey;
 - (void)_setMaskLayer:(UIView *)maskLayer{
 	objc_setAssociatedObject(self, &CATCustomMaskLayerKey, maskLayer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
-
 - (UIImage *)_backgroundImage{
 	return objc_getAssociatedObject(self, &CATCustomBackgroundImageKey);
 }
