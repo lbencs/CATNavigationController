@@ -35,6 +35,8 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector);
 @interface UINavigationBar (CAT)
 - (void)at_setAlpha:(CGFloat)alpha;
 @end
+
 @interface UITabBar (CAT)
 - (void)at_setAlpha:(CGFloat)alpha;
 @end
+

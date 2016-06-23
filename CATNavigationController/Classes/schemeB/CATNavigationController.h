@@ -14,7 +14,7 @@
 @end
 
 @interface CATNavigationController : UINavigationController
-@property (nonatomic, weak) id<CATNavigationControllerDelegate>delegate;
+@property (nonatomic, weak) id <CATNavigationControllerDelegate> at_delegate;
 @end
 
 @interface UINavigationController (CATNavigationController)

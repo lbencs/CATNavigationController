@@ -14,13 +14,13 @@
 #import "CATProvider.h"
 #import "UINavigationBar+CATCustom.h"
 
-typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
-	CATNavigationPopAnimationPop,
-	CATNavigationPopAnimationDrag,
-	CATNavigationPopAnimationDragCalcelled,
-	CATNavigationPopAnimationDragFinished
-};
 
+typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
+	CATNavigationPopAnimationPop,  //Pop 方式
+	CATNavigationPopAnimationDrag,  //拖拽方式
+	CATNavigationPopAnimationDragCalcelled, //拖拽取消
+	CATNavigationPopAnimationDragFinished //拖拽Pop完成
+};
 
 @interface CATNavigationController ()<UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactivePopTransition;
@@ -32,7 +32,6 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 @implementation CATNavigationController
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	// Do any additional setup after loading the view.
 	self.delegate = self;
 	
 	UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
