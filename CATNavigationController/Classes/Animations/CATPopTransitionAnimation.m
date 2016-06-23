@@ -44,11 +44,10 @@
 	toVcCover.bounds = containerView.bounds;
 	[containerView insertSubview:toVcCover belowSubview:fromVC.view];
 	
-	toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.95);
+	toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
 	
 	UINavigationBar *navigationBar = toVC.navigationController.navigationBar;
 	navigationBar.transform = CGAffineTransformMakeTranslation(0, -100);
-//	toVC.navigationController.navigationBar.
 	[toVC.tabBarController.tabBar at_setAlpha:0.0];
 	
 	[UIView animateWithDuration:duration

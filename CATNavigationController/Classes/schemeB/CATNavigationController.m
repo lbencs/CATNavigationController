@@ -70,8 +70,9 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
 	
 	CGPoint beginningLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
-	CGFloat maxAllowedInitialDistance = self.at_interactiveMinMoveDistance;
-	if (maxAllowedInitialDistance > 0 && beginningLocation.x > maxAllowedInitialDistance) {
+	
+    if (self.at_interactiveMinMoveDistance > 0
+        && beginningLocation.x > self.at_interactiveMinMoveDistance) {
 		return NO;
 	}
 	if (self.childViewControllers.count == 1) {
@@ -80,6 +81,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	if ([[self valueForKey:@"_isTransitioning"] boolValue]) {
 		return NO;
 	}
+    
 	return YES;
 }
 
@@ -232,6 +234,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	if (!screem) {
 		screem = self.view;
 	}
+    
 	[[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:screem]];
 	
 	[self pushViewController:viewController animated:animated];
@@ -272,6 +275,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	
 //	CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
 //	navigationController.customPopGestureRecognizer.enabled = self.at_ableInteractivePop;
+    
 	
 	if (self.at_navigationBarBackgroundColor) {
 		[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];

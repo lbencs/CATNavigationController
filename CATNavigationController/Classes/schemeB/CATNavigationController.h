@@ -8,10 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class CATNavigationController;
+
+@protocol CATNavigationControllerDelegate <NSObject>
+- (void)supportInteractiveGestureNavigationController:(CATNavigationController *)navigationController;
+@end
+
+
 @interface CATNavigationController : UINavigationController
 @property (nonnull ,nonatomic, strong, readonly) UIPercentDrivenInteractiveTransition *interactivePopTransition;
 @property (nonnull, nonatomic, strong, readonly) UIPanGestureRecognizer *customPopGestureRecognizer;
+
+@property (nullable, nonatomic, weak) id<UIGestureRecognizerDelegate>delegate;
 @end
+
+
 
 
 @interface UINavigationController (CATNavigationController)
