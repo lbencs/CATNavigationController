@@ -25,10 +25,10 @@ static int i = 0;
 																			 action:@selector(next:)];
 	
 	self.title = @"Title";
-	
+	self.at_showTabBar = YES;
 	self.at_navigationBarBackgroundColor = [UIColor greenColor];
 	self.at_navigationBarBottomLineColor = [UIColor blackColor];
-	self.at_ableInteractivePop = (i % 2 == 0 );
+//	self.at_ableInteractivePop = (i % 2 == 0 );
 	
 	
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -61,8 +61,6 @@ static int i = 0;
 	[button setTitle:[NSString stringWithFormat:@"Pop With No Animation"] forState:UIControlStateNormal];
 	[button addTarget:self action:@selector(btnClick3:) forControlEvents:UIControlEventTouchUpInside];
 	
-	
-	
 	i ++;
 }
 
@@ -74,8 +72,6 @@ static int i = 0;
 		[self.navigationController at_popToViewController:self.topVC animated:YES];
 	}
 }
-
-
 - (void)btnClick4:(UIButton *)sender{
 	[self.navigationController at_popToRootViewControllerAnimated:NO];
 }

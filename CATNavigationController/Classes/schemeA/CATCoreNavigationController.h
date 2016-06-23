@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CATCoreNavigationController : UINavigationController
-
 + (CATCoreNavigationController *)shareNavigationController;
-
 @end

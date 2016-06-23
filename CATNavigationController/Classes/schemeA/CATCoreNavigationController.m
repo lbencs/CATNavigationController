@@ -16,11 +16,9 @@
 - (UIViewController *)childViewControllerForStatusBarStyle {
 	return [self rootViewController];
 }
-
 - (UIViewController *)childViewControllerForStatusBarHidden {
 	return [self rootViewController];
 }
-
 - (UIViewController *)rootViewController {
 	return self.childViewControllers.firstObject;
 }
@@ -28,13 +26,11 @@
 
 
 @interface CATCoreNavigationController ()
-
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactivePopTransition;
 @property (nonatomic, strong) UIPanGestureRecognizer *popPanGesture;
 @end
 
 @implementation CATCoreNavigationController
-
 + (CATCoreNavigationController *)shareNavigationController{
 	static dispatch_once_t onceToken;
 	static CATCoreNavigationController *nvc = nil;
@@ -43,18 +39,14 @@
 	});
 	return nvc;
 }
-
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController{
 	CATCoreNavigationController *nvc = [CATCoreNavigationController shareNavigationController];
 	nvc.viewControllers = @[rootViewController];
 	return nvc;
 }
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
 	[self setNavigationBarHidden:YES animated:NO];
-	
 	id target = self.interactivePopGestureRecognizer.delegate;
 	SEL action = NSSelectorFromString(@"handleNavigationTransition:");
 	self.popPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
@@ -84,16 +76,12 @@
 		 *  告诉控制器开始执行pop的动画
 		 */
 		[self popViewControllerAnimated:YES];
-	}
-	else if (recognizer.state == UIGestureRecognizerStateChanged) {
-		
+	}else if (recognizer.state == UIGestureRecognizerStateChanged) {
 		/**
 		 *  更新手势的完成进度
 		 */
 		[self.interactivePopTransition updateInteractiveTransition:progress];
-	}
-	else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
-		
+	}else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
 		/**
 		 *  手势结束时如果进度大于一半，那么就完成pop操作，否则重新来过。
 		 */
@@ -103,15 +91,11 @@
 		else {
 			[self.interactivePopTransition cancelInteractiveTransition];
 		}
-		
 		self.interactivePopTransition = nil;
 	}
-	
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-
 @end

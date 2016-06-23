@@ -24,7 +24,10 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 
 @interface CATNavigationController ()<UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactivePopTransition;
+
 @property (nonatomic, weak) UIPanGestureRecognizer *customPopGestureRecognizer;
+@property (nonatomic, weak) id <CATNavigationControllerDelegate> at_delegate;
+
 @property (nonatomic, assign) CATNavigationPopAnimation popAnimation;
 @property (nonatomic, assign) BOOL ableInteractivePop;
 @end
@@ -79,20 +82,33 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 - (void)navigationController:(UINavigationController *)navigationController
 	  willShowViewController:(UIViewController *)viewController
 					animated:(BOOL)animated{
+	if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:willShowViewController:animated:)]) {
+		return [self.at_delegate navigationController:navigationController willShowViewController:viewController animated:animated];
+	}
 }
 - (void)navigationController:(UINavigationController *)navigationController
 	   didShowViewController:(UIViewController *)viewController
 					animated:(BOOL)animated{
+	if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {
+		return [self.at_delegate navigationController:navigationController didShowViewController:viewController animated:animated];
+	}
 }
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
 								  animationControllerForOperation:(UINavigationControllerOperation)operation
 											   fromViewController:(UIViewController *)fromVC
 												 toViewController:(UIViewController *)toVC{
+	
+	if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:animationControllerForOperation:fromViewController:toViewController:)]) {
+		return [self.at_delegate navigationController:navigationController
+					  animationControllerForOperation:operation
+								   fromViewController:fromVC
+									 toViewController:toVC];
+	}
+	
 	if (operation == UINavigationControllerOperationPop) {
 		return [[CATPopTransitionAnimation alloc] initWithCompletion:^{
 			if (_popAnimation == CATNavigationPopAnimationDragFinished ||
 				_popAnimation == CATNavigationPopAnimationPop) {
-				
 				[[CATPageManager shareManager] pop];
 			}
 			_popAnimation = CATNavigationPopAnimationPop;
@@ -102,10 +118,16 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	}else if (operation == UINavigationControllerOperationNone){
 		NSLog(@"none");
 	}
+	
 	return nil;
 }
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
 						 interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController{
+	
+	if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:interactionControllerForAnimationController:)]) {
+		return [self.at_delegate navigationController:navigationController interactionControllerForAnimationController:animationController];
+	}
+	
 	if ([animationController isKindOfClass:[CATPopTransitionAnimation class]]) {
 		return self.interactivePopTransition;
 	}else if ([animationController isKindOfClass:[CATPushTransitionAnimation class]]){
@@ -114,9 +136,15 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	return nil;
 }
 - (UIInterfaceOrientationMask)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController{
+	if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationControllerSupportedInterfaceOrientations:)]) {
+		return [self.at_delegate navigationControllerSupportedInterfaceOrientations:navigationController];
+	}
 	return UIInterfaceOrientationMaskAll;
 }
 - (UIInterfaceOrientation)navigationControllerPreferredInterfaceOrientationForPresentation:(UINavigationController *)navigationController{
+	if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationControllerPreferredInterfaceOrientationForPresentation:)]) {
+		return [self.at_delegate navigationControllerPreferredInterfaceOrientationForPresentation:navigationController];
+	}
 	return UIInterfaceOrientationMaskAll;
 }
 #pragma mark - private methods
@@ -162,13 +190,10 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	if (!animated) {
 		[[CATPageManager shareManager] pop];
 	}
-	NSLog(@"%d--%d",[[self viewControllers] count],[[CATPageManager shareManager] count]);
 	return [self at_popViewControllerAnimated:animated];
 }
 - (NSArray<UIViewController *> *)at_popToViewController:(UIViewController *)viewController animated:(BOOL)animated{
-	
 	NSArray <__kindof UIViewController *> *viewControllers = [self popToViewController:viewController animated:animated];
-	
 	for (int i = 0; i < viewControllers.count -1; i ++) {
 		[[CATPageManager shareManager] pop];
 	}
@@ -178,11 +203,8 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	return viewControllers;
 }
 - (NSArray<UIViewController *> *)at_popViewController:(UIViewController *)viewController animated:(BOOL)animated{
-	
 	NSArray <__kindof UIViewController *> *viewControllers = self.viewControllers;
-	
 	__block UIViewController *popToVC = nil;
-	
 	[viewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		if ([obj isEqual:viewController]) {
 			if (idx > 0) {
@@ -198,9 +220,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	}
 }
 - (NSArray<UIViewController *> *)at_popToRootViewControllerAnimated:(BOOL)animated{
-	
 	NSArray<__kindof UIViewController *> *viewControllers = [self popToRootViewControllerAnimated:animated];
-	
 	for (int i = 0; i < viewControllers.count -1; i ++) {
 		[[CATPageManager shareManager] pop];
 	}
@@ -211,15 +231,11 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 }
 // push
 - (void)at_pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-	
 	UIView *screem = self.tabBarController.view;
-	
 	if (!screem) {
 		screem = self.view;
 	}
-    
 	[[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:screem]];
-	
 	[self pushViewController:viewController animated:animated];
 }
 // getter && setter
@@ -248,14 +264,10 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 }
 - (void)at_viewWillAppear:(BOOL)animated{
 	[self at_viewWillAppear:animated];
-	
 	[self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
-	
 	[self.tabBarController.tabBar setHidden:!self.at_showTabBar];
-	
 	CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
 	navigationController.ableInteractivePop = self.at_ableInteractivePop;
-	
 	if (self.at_navigationBarBackgroundColor) {
 		[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
 	}else{
