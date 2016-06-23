@@ -22,15 +22,12 @@ static char CATCustomEmptyImageKey;
 @end
 
 @implementation UINavigationBar (CATCustom)
-
 - (void)at_setBackgroundColor:(UIColor *)backgroundColor{
 	self._maskLayer.backgroundColor = backgroundColor;
 }
 - (void)at_setContentAlpha:(CGFloat)alpha{
-	
 	if (alpha < 0) alpha = 0;
 	if (alpha > 1) alpha = 1;
-	
 	[self _setAlpha:alpha forSubviewsOfView:self];
 }
 - (void)at_undo{
@@ -38,7 +35,6 @@ static char CATCustomEmptyImageKey;
 	self._maskLayer = nil;
 	self._backgroundImage = nil;
 }
-
 - (void)at_setBottomLineColor:(UIColor *)color{
 	[self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 	UIImage *line = [UIImage at_imageWithColor:color withSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0.3)];
@@ -47,7 +43,6 @@ static char CATCustomEmptyImageKey;
 }
 
 #pragma mark - privates methods
-
 - (void)_setAlpha:(CGFloat)alpha forSubviewsOfView:(UIView *)view{
 	
 	for (UIView *v in view.subviews) {
@@ -67,7 +62,6 @@ static char CATCustomEmptyImageKey;
 }
 
 #pragma mark - setter/getter
-
 - (UIView *)_maskLayer{
 	UIView *layer = objc_getAssociatedObject(self, &CATCustomMaskLayerKey);
 	if (!layer) {

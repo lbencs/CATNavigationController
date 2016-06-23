@@ -1,1 +1,1 @@
-../../../../../CATNavigationController/Classes/Animations/CATTransitionAnimation.h
+../../../../../CATNavigationController/Classes/schemeB/Class/CATTransitionAnimation.h

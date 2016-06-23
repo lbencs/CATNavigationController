@@ -13,8 +13,6 @@
 @end
 
 @interface CATWrapViewController : UIViewController
-
 @property (nonatomic, strong, readonly) __kindof UIViewController *contentViewController;
-
 + (CATWrapViewController *)wrapWithViewController:(UIViewController *)viewController;
 @end

@@ -10,16 +10,11 @@
 #import <objc/runtime.h>
 
 @implementation CATProvider
-
 @end
 
-
-
 CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
-	
 	Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
 	Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);
-	
 	BOOL didAddMethod = class_addMethod(aClass,
 										originalSelector,
 										method_getImplementation(swizzledMethod),
@@ -33,6 +28,14 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 		method_exchangeImplementations(originalMethod, swizzledMethod);
 	}
 }
+CATSubViewSetAlpha(CGFloat alpha, UIView *superView){
+	for (UIView *v in superView.subviews) {
+		v.alpha = alpha;
+		CATSubViewSetAlpha(alpha, v);
+	}
+}
+
+
 @interface CATPageManager ()
 @property (nonatomic, strong) NSMutableArray *pages;
 @end
@@ -47,7 +50,6 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 	});
 	return manager;
 }
-
 - (void)push:(UIImage *)objc{
 	if (objc) {
 		[self.pages addObject:objc];
@@ -88,7 +90,6 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 }
 
 #pragma mark -
-
 - (NSMutableArray *)pages{
 	if (!_pages) {
 		_pages = [[NSMutableArray alloc] init];
@@ -98,7 +99,6 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 @end
 
 @implementation UIImage (CATExtension)
-
 + (UIImage *)at_imageWithColor:(UIColor *)color withSize:(CGSize)size{
 	CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
 	UIGraphicsBeginImageContext(rect.size);
@@ -109,7 +109,6 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 	UIGraphicsEndImageContext();
 	return image;
 }
-
 + (UIImage *)at_screenShotImageWithCaptureView:(UIView *)captureView{
 	UIGraphicsBeginImageContextWithOptions(captureView.bounds.size, NO, [UIScreen mainScreen].scale);
 	[captureView drawViewHierarchyInRect:captureView.bounds afterScreenUpdates:YES];
@@ -117,15 +116,7 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 	UIGraphicsEndImageContext();
 	return image;
 }
-
 @end
-
-CATSubViewSetAlpha(CGFloat alpha, UIView *superView){
-	for (UIView *v in superView.subviews) {
-		v.alpha = alpha;
-		CATSubViewSetAlpha(alpha, v);
-	}
-}
 
 @implementation UINavigationBar (CAT)
 - (void)at_setAlpha:(CGFloat)alpha{

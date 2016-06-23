@@ -9,7 +9,6 @@
 #import "CATNavigationController.h"
 #import "CATCoreNavigationController.h"
 #import "CATWrapViewController.h"
-#import "CATNavigationTransitioningAnimationDefault.h"
 #import "CATPopTransitionAnimation.h"
 #import "CATPushTransitionAnimation.h"
 #import "CATProvider.h"

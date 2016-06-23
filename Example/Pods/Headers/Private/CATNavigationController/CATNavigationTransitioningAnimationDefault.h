@@ -1,1 +1,0 @@
-../../../../../CATNavigationController/Classes/Animations/CATNavigationTransitioningAnimationDefault.h
