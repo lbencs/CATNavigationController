@@ -11,7 +11,7 @@
 #import "CATNavigationController.h"
 #import "UINavigationBar+CATCustom.h"
 
-@interface CATViewController ()<UIScrollViewDelegate, CATNavigationControllerDelegate>
+@interface CATViewController ()<UIScrollViewDelegate>
 @end
 
 @implementation CATViewController
@@ -23,26 +23,12 @@
 	self.at_showTabBar = YES;
 	self.at_navigationBarBackgroundColor = [UIColor yellowColor];
 	self.at_navigationBarBottomLineColor = [UIColor redColor];
-	self.navigationController.at_delegate = self;
 }
 - (void)didReceiveMemoryWarning{
 	[super didReceiveMemoryWarning];
 }
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
-}
-
-#pragma mark - CATNavigationControllerDelegate
-- (nullable id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
-								   interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>) animationController{
-	return nil;
-}
-
-- (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-											animationControllerForOperation:(UINavigationControllerOperation)operation
-														 fromViewController:(UIViewController *)fromVC
-														   toViewController:(UIViewController *)toVC{
-	return nil;
 }
 
 #pragma mark - Table view data source
@@ -61,7 +47,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 	NSLog(@"%@",self.navigationController);
 	CATChildViewController *nvc = [[CATChildViewController alloc] init];
-//	[self.navigationController at_pushViewController:nvc animated:YES];
-	[self.navigationController pushViewController:nvc animated:YES];
+	[self.navigationController at_pushViewController:nvc animated:YES];
 }
 @end
