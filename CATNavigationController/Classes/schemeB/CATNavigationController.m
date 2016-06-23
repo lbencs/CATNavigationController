@@ -270,8 +270,8 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 	
 	[self.tabBarController.tabBar setHidden:!self.at_showTabBar];
 	
-//	CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
-//	navigationController.customPopGestureRecognizer.enabled = self.at_ableInteractivePop;
+	CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
+	navigationController.customPopGestureRecognizer.enabled = self.at_ableInteractivePop;
 	
 	if (self.at_navigationBarBackgroundColor) {
 		[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
