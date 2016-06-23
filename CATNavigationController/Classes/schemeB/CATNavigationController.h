@@ -8,22 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CATNavigationController : UINavigationController
-@property (nonnull ,nonatomic, strong, readonly) UIPercentDrivenInteractiveTransition *interactivePopTransition;
-@property (nonnull, nonatomic, strong, readonly) UIPanGestureRecognizer *customPopGestureRecognizer;
+@class CATNavigationController;
+
+@protocol CATNavigationControllerDelegate <NSObject>
 @end
 
+@interface CATNavigationController : UINavigationController
+@property (nonatomic, weak) id<CATNavigationControllerDelegate>delegate;
+@end
 
 @interface UINavigationController (CATNavigationController)
 @property (nonatomic, assign, setter=at_setInteractiveMinMoveDistance:) CGFloat at_interactiveMinMoveDistance;
-
-
 - (void)at_pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
-
 - (nullable NSArray<__kindof UIViewController *> *)at_popToViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (nullable NSArray<__kindof UIViewController *> *)at_popViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (nullable NSArray<__kindof UIViewController *> *)at_popToRootViewControllerAnimated:(BOOL)animated;
-
 @end
 
 @interface UIViewController (CATNavigationController)

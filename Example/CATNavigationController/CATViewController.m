@@ -27,25 +27,17 @@
 - (void)didReceiveMemoryWarning{
 	[super didReceiveMemoryWarning];
 }
-
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-	
-}
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 10;
+	return 40;
 }
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 	cell.textLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
@@ -57,5 +49,4 @@
 	CATChildViewController *nvc = [[CATChildViewController alloc] init];
 	[self.navigationController at_pushViewController:nvc animated:YES];
 }
-
 @end

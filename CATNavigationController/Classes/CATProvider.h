@@ -16,9 +16,12 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector);
 
 @interface CATPageManager : NSObject
 + (CATPageManager *)shareManager;
+
 - (void)push:(UIImage *)objc;
-- (UIImage *)firstObjc;
 - (UIImage *)pop;
+
+- (UIImage *)firstObjc;
+- (NSInteger)count;
 
 @property (nonatomic, strong) UIImage *cache;
 @end

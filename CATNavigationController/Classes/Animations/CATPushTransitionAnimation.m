@@ -49,7 +49,7 @@
 	
     [UIView animateWithDuration:[self transitionDuration:transitionContext]
                      animations:^{
-                         fromVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.88, 0.90);
+                         fromVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.95, 0.95);
 						 
 						 toVC.view.transform = CGAffineTransformIdentity;
 						 navigationBar.transform = CGAffineTransformIdentity;

@@ -70,7 +70,9 @@ static int i = 0;
 	[self.navigationController popViewControllerAnimated:NO];
 }
 - (void)btnClick2:(UIButton *)sender{
-	[self.navigationController at_popToViewController:self.topVC animated:YES];
+	if (self.topVC) {
+		[self.navigationController at_popToViewController:self.topVC animated:YES];
+	}
 }
 
 

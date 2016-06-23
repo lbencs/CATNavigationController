@@ -52,6 +52,15 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 	if (objc) {
 		[self.pages addObject:objc];
 	}
+	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+	UILabel *label = [keyWindow viewWithTag:10010];
+	if (!label) {
+		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 550, keyWindow.bounds.size.width, 44)];
+		label.tag = 10010;
+		[keyWindow addSubview:label];
+	}
+	label.text = [NSString stringWithFormat:@"cache:%ld",(long)self.pages.count];
+	
     NSLog(@"Push:%@",self.pages);
 }
 - (UIImage *)firstObjc{
@@ -62,8 +71,20 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector){
 	if (img) {
 		[self.pages removeObject:img];
 	}
-    NSLog(@"Pop: %@",self.pages);
+	
+	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+	UILabel *label = [keyWindow viewWithTag:10010];
+	if (!label) {
+		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 550, keyWindow.bounds.size.width, 44)];
+		label.tag = 10010;
+		[keyWindow addSubview:label];
+	}
+	label.text = [NSString stringWithFormat:@"cache:%ld",(long)self.pages.count];
+	NSLog(@"Pop: %@",self.pages);
 	return img;
+}
+- (NSInteger)count{
+	return [self.pages count];
 }
 
 #pragma mark -
