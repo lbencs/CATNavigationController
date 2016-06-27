@@ -13,11 +13,14 @@
 @protocol CATNavigationControllerDelegate <UINavigationControllerDelegate>
 @end
 
+
 @interface CATNavigationController : UINavigationController
+
 @end
 
+
 @interface UINavigationController (CATNavigationController)
-@property (nonatomic, weak) id <CATNavigationControllerDelegate> at_delegate;
+@property (nonatomic, weak) id<CATNavigationControllerDelegate> at_delegate;
 @property (nonatomic, assign, setter=at_setInteractiveMinMoveDistance:) CGFloat at_interactiveMinMoveDistance;
 
 - (void)at_pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
@@ -25,6 +28,7 @@
 - (nullable NSArray<__kindof UIViewController *> *)at_popViewController:(UIViewController *)viewController animated:(BOOL)animated;
 - (nullable NSArray<__kindof UIViewController *> *)at_popToRootViewControllerAnimated:(BOOL)animated;
 @end
+
 
 @interface UIViewController (CATNavigationController)
 //default is YES, when push from viewcontroller with UITabBarController,yes: show UITabBar, no: hidden UITabBar.
