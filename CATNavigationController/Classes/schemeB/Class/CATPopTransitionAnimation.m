@@ -37,8 +37,8 @@
 	NSLog(@"%@",[NSDate date]);
 	
 	UIImageView *fromVcCover = [[UIImageView alloc] initWithImage:fromVcScreenshot];
-	fromVcCover.bounds = fromVC.view.bounds;
-	[fromVC.view addSubview:fromVcCover];
+	fromVcCover.bounds = containerView.bounds;
+	[containerView addSubview:fromVcCover];
 	
 	UIImageView *toVcCover = [[UIImageView alloc] initWithImage:toVcScreenshot];
 	toVcCover.bounds = containerView.bounds;
@@ -52,6 +52,7 @@
 	
 	[UIView animateWithDuration:duration
 					 animations:^{
+						 fromVcCover.transform = CGAffineTransformMakeTranslation(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
 						 fromVC.view.transform = CGAffineTransformMakeTranslation(CGRectGetWidth([UIScreen mainScreen].bounds), 0);
 						 toVcCover.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
 					 } completion:^(BOOL finished) {

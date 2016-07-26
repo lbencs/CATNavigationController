@@ -55,10 +55,10 @@ CATSubViewSetAlpha(CGFloat alpha, UIView *superView){
 		[self.pages addObject:objc];
 	}
 	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-	UILabel *label = [keyWindow viewWithTag:10010];
-	if (!label) {
+	UILabel *label = [keyWindow viewWithTag:501934];
+	if (!label || ![label isKindOfClass:[UILabel class]]) {
 		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 550, keyWindow.bounds.size.width, 44)];
-		label.tag = 10010;
+		label.tag = 501934;
 		[keyWindow addSubview:label];
 	}
 	label.text = [NSString stringWithFormat:@"ImageCache:%ld",(long)self.pages.count];
@@ -75,10 +75,10 @@ CATSubViewSetAlpha(CGFloat alpha, UIView *superView){
 	}
 	
 	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-	UILabel *label = [keyWindow viewWithTag:10010];
-	if (!label) {
+	UILabel *label = [keyWindow viewWithTag:501934];
+	if (!label || ![label isKindOfClass:[UILabel class]]) {
 		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 550, keyWindow.bounds.size.width, 44)];
-		label.tag = 10010;
+		label.tag = 501934;
 		[keyWindow addSubview:label];
 	}
 	label.text = [NSString stringWithFormat:@"ImageCache:%ld",(long)self.pages.count];

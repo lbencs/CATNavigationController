@@ -26,8 +26,7 @@ static char CATCustomEmptyImageKey;
 	self._maskLayer.backgroundColor = backgroundColor;
 }
 - (void)at_setContentAlpha:(CGFloat)alpha{
-	if (alpha < 0) alpha = 0;
-	if (alpha > 1) alpha = 1;
+	alpha = MIN( MAX(0, alpha), 1);
 	[self _setAlpha:alpha forSubviewsOfView:self];
 }
 - (void)at_undo{
@@ -57,7 +56,7 @@ static char CATCustomEmptyImageKey;
 		
 		v.alpha = alpha;
 		
-		[self _setAlpha:alpha forSubviewsOfView:view];
+		[self _setAlpha:alpha forSubviewsOfView:v];
 	}
 }
 

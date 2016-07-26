@@ -14,6 +14,38 @@
 #import "CATProvider.h"
 #import "UINavigationBar+CATCustom.h"
 
+#define CATAssociatedProperty(_get, _set, _type)\
+\
+- (instancetype)_get{\
+return objc_getAssociatedObject(self, _cmd);\
+}\
+\
+- (void)_set(_type)value{\
+objc_setAssociatedObject(self, @selector(_get), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
+}
+
+
+#define CATAssociatedBoolProperty(_get, _set)\
+\
+- (BOOL)_get{\
+return [objc_getAssociatedObject(self, _cmd) boolValue];\
+}\
+\
+- (void)_set(BOOL)value{\
+objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
+}
+
+
+#define CATAssociatedIntProperty(_get, _set)\
+\
+- (NSInteger)_get{\
+return [objc_getAssociatedObject(self, _cmd) integerValue];\
+}\
+\
+- (void)_set(NSInteger)value{\
+objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
+}
+
 
 typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
     CATNavigationPopAnimationPop,           //Pop 方式
@@ -271,7 +303,6 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 
 
 @implementation UIViewController (CATNavigationController)
-
 + (void)load
 {
     static dispatch_once_t onceToken;
@@ -284,68 +315,37 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 - (void)at_viewWillAppear:(BOOL)animated
 {
     [self at_viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
-    [self.tabBarController.tabBar setHidden:!self.at_showTabBar];
-    CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
-    navigationController.ableInteractivePop = self.at_ableInteractivePop;
-    if (self.at_navigationBarBackgroundColor) {
-        [self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
-    } else {
-        [self.navigationController.navigationBar at_setBackgroundColor:[UINavigationBar appearance].backgroundColor];
-    }
-    if (self.at_navigationBarBottomLineColor) {
-        [self.navigationController.navigationBar at_setBottomLineColor:self.at_navigationBarBottomLineColor];
-    } else {
-        [self.navigationController.navigationBar at_setBottomLineColor:[UINavigationBar appearance].backgroundColor];
-    }
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:self.at_statusBarStyle animated:YES];
+	
+	if ([self.navigationController isKindOfClass:[CATNavigationController class]]) {
+		
+		[self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
+		[self.tabBarController.tabBar setHidden:!self.at_showTabBar];
+		
+		CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
+		navigationController.ableInteractivePop = !self.at_disableInteractivePop;
+		
+		if (self.at_navigationBarBackgroundColor) {
+			[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
+		} else {
+			[self.navigationController.navigationBar at_setBackgroundColor:[UINavigationBar appearance].backgroundColor];
+		}
+		
+		if (self.at_navigationBarBottomLineColor) {
+			[self.navigationController.navigationBar at_setBottomLineColor:self.at_navigationBarBottomLineColor];
+		} else {
+			[self.navigationController.navigationBar at_setBottomLineColor:[UINavigationBar appearance].backgroundColor];
+		}
+	}
 }
 
-- (BOOL)at_hiddenNavigationBar
-{
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
-- (void)at_setHiddenNavigationBar:(BOOL)at_hiddenNavigationBar
-{
-    objc_setAssociatedObject(self, @selector(at_hiddenNavigationBar), @(at_hiddenNavigationBar), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+CATAssociatedBoolProperty(at_hiddenNavigationBar, at_setHiddenNavigationBar:)
+CATAssociatedBoolProperty(at_showTabBar, at_setShowTabBar:)
+CATAssociatedBoolProperty(at_disableInteractivePop, at_setAbleInteractivePop:)
 
-- (BOOL)at_showTabBar
-{
-    return [objc_getAssociatedObject(self, _cmd) boolValue];
-}
-- (void)at_setShowTabBar:(BOOL)at_showTabBar
-{
-    objc_setAssociatedObject(self, @selector(at_showTabBar), @(at_showTabBar), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+CATAssociatedIntProperty(at_statusBarStyle, at_setStatusBarStyle:)
 
-- (UIColor *)at_navigationBarBackgroundColor
-{
-    return objc_getAssociatedObject(self, _cmd);
-}
-- (void)at_setNavigationBarBackgroundColor:(UIColor *)at_navigationBarBackgroundColor
-{
-    objc_setAssociatedObject(self, @selector(at_navigationBarBackgroundColor), at_navigationBarBackgroundColor, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (UIColor *)at_navigationBarBottomLineColor
-{
-    return objc_getAssociatedObject(self, _cmd);
-}
-- (void)at_setNavigationBarBottomLineColor:(UIColor *)at_navigationBarBottomLineColor
-{
-    objc_setAssociatedObject(self, @selector(at_navigationBarBottomLineColor), at_navigationBarBottomLineColor, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (BOOL)at_ableInteractivePop
-{
-    NSNumber *able = objc_getAssociatedObject(self, _cmd);
-    if (able) {
-        return [able boolValue];
-    }
-    return YES;
-}
-- (void)at_setAbleInteractivePop:(BOOL)at_ableInteractivePop
-{
-    objc_setAssociatedObject(self, @selector(at_ableInteractivePop), @(at_ableInteractivePop), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
+CATAssociatedProperty(at_navigationBarBackgroundColor, at_setNavigationBarBackgroundColor:, UIColor *)
+CATAssociatedProperty(at_navigationBarBottomLineColor, at_setNavigationBarBottomLineColor:, UIColor *)
 @end

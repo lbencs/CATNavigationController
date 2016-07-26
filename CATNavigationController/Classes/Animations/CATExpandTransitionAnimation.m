@@ -23,7 +23,6 @@
 	[containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
 	NSTimeInterval duration = [self transitionDuration:transitionContext];
 	
-	//	toViewController.view.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth([UIScreen mainScreen].bounds), 0);
 	toViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.9, 0.9);
 	UIView *mask = [[UIView alloc] initWithFrame:toViewController.view.bounds];
 	[toViewController.view addSubview:mask];
