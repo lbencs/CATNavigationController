@@ -45,5 +45,4 @@
 //default is UIStatusBarStyleDefault
 @property (nonatomic, assign, setter=at_setStatusBarStyle:) UIStatusBarStyle at_statusBarStyle;
 
-@property (nonatomic, assign, setter=at_setTranslucent:) BOOL at_translucent;
 @end

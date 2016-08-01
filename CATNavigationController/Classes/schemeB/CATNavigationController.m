@@ -324,7 +324,11 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 
     [[UIApplication sharedApplication] setStatusBarStyle:self.at_statusBarStyle animated:YES];
 
-    if ([self.navigationController isKindOfClass:[CATNavigationController class]] && ![self isKindOfClass:NSClassFromString(@"GXQNetworkLoadingViewController")] && ![self isKindOfClass:NSClassFromString(@"GXQNetworkFailedViewController")]) {
+    if ([self.navigationController isKindOfClass:[CATNavigationController class]] &&
+        ![self isKindOfClass:NSClassFromString(@"GXQNetworkLoadingViewController")] &&
+        ![self isKindOfClass:NSClassFromString(@"GXQNetworkFailedViewController")] &&
+        ![self isKindOfClass:NSClassFromString(@"")]) {
+        
         [self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
         [self.tabBarController.tabBar setHidden:!self.at_showTabBar];
 
@@ -349,7 +353,6 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 CATAssociatedBoolProperty(at_hiddenNavigationBar, at_setHiddenNavigationBar:);
 CATAssociatedBoolProperty(at_showTabBar, at_setShowTabBar:);
 CATAssociatedBoolProperty(at_disableInteractivePop, at_setAbleInteractivePop:);
-//CATAssociatedBoolProperty(at_translucent, at_setTranslucent:);
 
 CATAssociatedIntProperty(at_statusBarStyle, at_setStatusBarStyle:);
 

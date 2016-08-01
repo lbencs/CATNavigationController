@@ -93,25 +93,24 @@ static char CATCustomEmptyImageKey;
         [self _setAlpha:alpha forSubviewsOfView:v];
     }
 }
-- (void)at_setUINavigationBarBackgroundAlpha:(CGFloat)alpha onView:(UIView *)view
+- (void)_clearBackgroundColorAtView:(UIView *)view
 {
     for (UIView *v in view.subviews) {
         if ([v isKindOfClass:NSClassFromString(@"_UINavigationBarBackground")]) {
-            v.alpha = alpha;
+            v.backgroundColor = [UIColor clearColor];
             return;
-        } else {
-            [self at_setUINavigationBarBackgroundAlpha:alpha onView:v];
+        }else{
+            [self _clearBackgroundColorAtView:v];
         }
     }
-    return;
 }
 
 #pragma mark - setter/getter
 - (UIView *)_maskLayer
 {
     UIView *layer = objc_getAssociatedObject(self, _cmd);
-
-    [self at_setUINavigationBarBackgroundAlpha:0.0 onView:self];
+    
+    [self _clearBackgroundColorAtView:self];
 
     if (!layer) {
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];

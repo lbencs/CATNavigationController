@@ -21,12 +21,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"History";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     self.at_showTabBar = YES;
     self.at_navigationBarBackgroundColor = [UIColor yellowColor];
     self.at_navigationBarBottomLineColor = [UIColor redColor];
     self.navigationController.navigationBar.translucent = YES;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.tabBarController.tabBar.translucent = YES;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -50,7 +53,6 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
-    // Configure the cell...
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

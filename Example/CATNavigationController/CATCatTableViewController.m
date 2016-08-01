@@ -8,6 +8,7 @@
 
 #import "CATCatTableViewController.h"
 #import "CATNavigationController.h"
+#import "CATDogChildViewController.h"
 
 @interface CATCatTableViewController ()
 
@@ -27,12 +28,24 @@
 
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
+//    [self addCover];
 }
 - (void)viewWillDisappear:(BOOL)animated{
 	[super viewWillDisappear:animated];
 }
-
-
+//- (void)addCover
+//{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        CATDogChildViewController *vc = [[CATDogChildViewController alloc] init];
+//        vc.at_showTabBar = YES;
+//        [self addChildViewController:vc];
+//        CGRect frame = self.view.bounds;
+//        frame.origin.y = 100;
+//        frame.size.height -= 200;
+//        vc.view.frame = frame;
+//        [self.view addSubview:vc.view];
+//    });
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
