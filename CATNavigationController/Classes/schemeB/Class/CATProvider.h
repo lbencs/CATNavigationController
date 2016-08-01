@@ -11,11 +11,19 @@
 @interface CATProvider : NSObject
 @end
 
+typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
+    CATNavigationPopAnimationPop,           //Pop 方式
+    CATNavigationPopAnimationDrag,          //拖拽方式
+    CATNavigationPopAnimationDragCalcelled, //拖拽取消
+    CATNavigationPopAnimationDragFinished   //拖拽Pop完成
+};
 
 CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector);
 
 @interface CATPageManager : NSObject
 + (CATPageManager *)shareManager;
+
+@property (nonatomic, assign) CATNavigationPopAnimation *animationStatus;
 
 - (void)push:(UIImage *)objc;
 - (UIImage *)pop;

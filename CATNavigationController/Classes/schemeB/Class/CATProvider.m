@@ -99,6 +99,7 @@ void CATSubViewSetAlpha(CGFloat alpha, UIView *superView)
         label.tag = 501934;
         [keyWindow addSubview:label];
     }
+    [keyWindow bringSubviewToFront:label];
     label.text = [NSString stringWithFormat:@"ImageCache:%ld", (long)self.pages.count];
 
     NSLog(@"Push:%@", self.pages);
@@ -122,6 +123,7 @@ void CATSubViewSetAlpha(CGFloat alpha, UIView *superView)
         label.tag = 501934;
         [keyWindow addSubview:label];
     }
+    [keyWindow bringSubviewToFront:label];
     label.text = [NSString stringWithFormat:@"ImageCache:%ld", (long)self.pages.count];
     NSLog(@"Pop: %@ ", self.pages);
 #endif

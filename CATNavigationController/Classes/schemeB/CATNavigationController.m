@@ -12,6 +12,7 @@
 #import "CATPopTransitionAnimation.h"
 #import "CATPushTransitionAnimation.h"
 #import "CATProvider.h"
+#import <objc/runtime.h>
 #import "UINavigationBar+CATCustom.h"
 
 #define CATAssociatedProperty(_get, _set, _type)                                                   \
@@ -53,126 +54,45 @@
     }
 
 
-typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
-    CATNavigationPopAnimationPop,           //Pop 方式
-    CATNavigationPopAnimationDrag,          //拖拽方式
-    CATNavigationPopAnimationDragCalcelled, //拖拽取消
-    CATNavigationPopAnimationDragFinished   //拖拽Pop完成
-};
-
-
-@interface CATNavigationController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
-@property (nonatomic, strong) UIPercentDrivenInteractiveTransition *interactivePopTransition;
-
-@property (nonatomic, weak) UIPanGestureRecognizer *customPopGestureRecognizer;
-@property (nonatomic, weak) id<CATNavigationControllerDelegate> at_delegate;
-
-@property (nonatomic, assign) CATNavigationPopAnimation popAnimation;
-@property (nonatomic, assign) BOOL ableInteractivePop;
+@implementation CATNavigationController
 @end
 
+@interface CATNavigationControllerDelegate : NSObject <UINavigationControllerDelegate>
+@property (nonatomic, weak) UIPercentDrivenInteractiveTransition *interactivePopTransition;
+@end
 
-@implementation CATNavigationController
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.delegate = self;
-
-    UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
-    gesture.enabled = NO;
-    UIView *gestureView = gesture.view;
-
-    UIPanGestureRecognizer *popRecognizer = [[UIPanGestureRecognizer alloc] init];
-    popRecognizer.delegate = self;
-    popRecognizer.maximumNumberOfTouches = 1;
-    [gestureView addGestureRecognizer:popRecognizer];
-
-    id target = gesture.delegate;
-    [popRecognizer addTarget:self action:@selector(handleControllerPop:)];
-    popRecognizer.maximumNumberOfTouches = 1;
-
-    self.customPopGestureRecognizer = popRecognizer;
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-#pragma mark - Delegate
-#pragma mark - UIGestureRecognizerDelegate
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    if (!self.ableInteractivePop) {
-        return NO;
-    }
-    CGPoint beginningLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
-    if (self.at_interactiveMinMoveDistance > 0 && beginningLocation.x > self.at_interactiveMinMoveDistance) {
-        return NO;
-    }
-    if (self.childViewControllers.count == 1) {
-        return NO;
-    }
-    if ([[self valueForKey:@"_isTransitioning"] boolValue]) {
-        return NO;
-    }
-    return YES;
-}
-
+@implementation CATNavigationControllerDelegate
 #pragma mark - UINavigationControllerDelegate
 - (void)navigationController:(UINavigationController *)navigationController
       willShowViewController:(UIViewController *)viewController
-                    animated:(BOOL)animated
-{
-    if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:willShowViewController:animated:)]) {
-        return [self.at_delegate navigationController:navigationController willShowViewController:viewController animated:animated];
-    }
-}
+                    animated:(BOOL)animated{}
 - (void)navigationController:(UINavigationController *)navigationController
        didShowViewController:(UIViewController *)viewController
-                    animated:(BOOL)animated
-{
-    if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {
-        return [self.at_delegate navigationController:navigationController didShowViewController:viewController animated:animated];
-    }
-}
+                    animated:(BOOL)animated{}
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
                                                fromViewController:(UIViewController *)fromVC
                                                  toViewController:(UIViewController *)toVC
 {
-    if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:animationControllerForOperation:fromViewController:toViewController:)]) {
-        return [self.at_delegate navigationController:navigationController
-                      animationControllerForOperation:operation
-                                   fromViewController:fromVC
-                                     toViewController:toVC];
-    }
-
     if (operation == UINavigationControllerOperationPop) {
         return [[CATPopTransitionAnimation alloc] initWithCompletion:^{
-            if (_popAnimation == CATNavigationPopAnimationDragFinished ||
-                _popAnimation == CATNavigationPopAnimationPop) {
+            if ([[CATPageManager shareManager] animationStatus] == CATNavigationPopAnimationDragFinished ||
+                [[CATPageManager shareManager] animationStatus] == CATNavigationPopAnimationPop) {
                 [[CATPageManager shareManager] pop];
             }
-            _popAnimation = CATNavigationPopAnimationPop;
+            [CATPageManager shareManager].animationStatus = CATNavigationPopAnimationPop;
         }];
     } else if (operation = UINavigationControllerOperationPush) {
         return [[CATPushTransitionAnimation alloc] init];
     } else if (operation == UINavigationControllerOperationNone) {
         NSLog(@"none");
     }
-
+    
     return nil;
 }
 - (id<UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                          interactionControllerForAnimationController:(id<UIViewControllerAnimatedTransitioning>)animationController
 {
-    if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationController:interactionControllerForAnimationController:)]) {
-        return [self.at_delegate navigationController:navigationController interactionControllerForAnimationController:animationController];
-    }
-
     if ([animationController isKindOfClass:[CATPopTransitionAnimation class]]) {
         return self.interactivePopTransition;
     } else if ([animationController isKindOfClass:[CATPushTransitionAnimation class]]) {
@@ -182,46 +102,21 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 }
 - (UIInterfaceOrientationMask)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController
 {
-    if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationControllerSupportedInterfaceOrientations:)]) {
-        return [self.at_delegate navigationControllerSupportedInterfaceOrientations:navigationController];
-    }
     return UIInterfaceOrientationMaskAll;
 }
 - (UIInterfaceOrientation)navigationControllerPreferredInterfaceOrientationForPresentation:(UINavigationController *)navigationController
 {
-    if (self.at_delegate && [self.at_delegate respondsToSelector:@selector(navigationControllerPreferredInterfaceOrientationForPresentation:)]) {
-        return [self.at_delegate navigationControllerPreferredInterfaceOrientationForPresentation:navigationController];
-    }
     return UIInterfaceOrientationMaskAll;
-}
-#pragma mark - private methods
-- (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer
-{
-    CGFloat progress = [recognizer translationInView:recognizer.view].x / recognizer.view.bounds.size.width;
-    progress = MIN(1.0, MAX(0.0, progress));
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        self.interactivePopTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
-        _popAnimation = CATNavigationPopAnimationDrag;
-        [self popViewControllerAnimated:YES];
-    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-        [self.interactivePopTransition updateInteractiveTransition:progress];
-    } else if (recognizer.state == UIGestureRecognizerStateEnded ||
-               recognizer.state == UIGestureRecognizerStateCancelled) {
-        if (progress > 0.5) {
-            _popAnimation = CATNavigationPopAnimationDragFinished;
-            [self.interactivePopTransition finishInteractiveTransition];
-        } else {
-            _popAnimation = CATNavigationPopAnimationDragCalcelled;
-            [self.interactivePopTransition cancelInteractiveTransition];
-        }
-        self.interactivePopTransition = nil;
-    }
 }
 @end
 
+@interface UINavigationController ()
+@property (nonatomic, strong, readwrite, setter=at_setInteractivePopTransition:) UIPercentDrivenInteractiveTransition *at_interactivePopTransition;
 
-#import <objc/runtime.h>
-
+@property (nonatomic, weak, setter=_setCustomPopGestureRecognizer:) UIPanGestureRecognizer *_customPopGestureRecognizer;
+@property (nonatomic, strong, setter=_setDelegate:) CATNavigationControllerDelegate *_delegate;
+@property (nonatomic, assign, setter=_setAbleInteractivePop:) BOOL _ableInteractivePop;
+@end
 
 @implementation UINavigationController (CATNavigationController)
 
@@ -229,6 +124,11 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        
+        CATSwizzeMethod([self class],
+                        @selector(viewDidLoad),
+                        @selector(at_viewDidLoad));
+        
         CATSwizzeMethod([self class],
                         @selector(popViewControllerAnimated:),
                         @selector(at_popViewControllerAnimated:));
@@ -247,6 +147,36 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
                         @selector(at_pushViewController:animated:));
     });
 }
+
+- (void)at_viewDidLoad
+{
+    //设置动画代理
+    self._delegate = [[CATNavigationControllerDelegate alloc] init];
+    [self addObserver:self._delegate forKeyPath:@"popAnimation" options:NSKeyValueObservingOptionNew context:nil];
+    self.delegate = self._delegate;
+    
+    //设置手势
+    UIGestureRecognizer *gesture = self.interactivePopGestureRecognizer;
+    gesture.enabled = NO;
+    UIView *gestureView = gesture.view;
+    
+    UIPanGestureRecognizer *popRecognizer = [[UIPanGestureRecognizer alloc] init];
+    popRecognizer.delegate = self;
+    popRecognizer.maximumNumberOfTouches = 1;
+    [gestureView addGestureRecognizer:popRecognizer];
+    
+    id target = gesture.delegate;
+    [popRecognizer addTarget:self action:@selector(handleControllerPop:)];
+    popRecognizer.maximumNumberOfTouches = 1;
+    self._customPopGestureRecognizer = popRecognizer;
+
+    //滑动触发距离
+    self.at_interactiveMinMoveDistance = 200.0f;
+    
+    // viewDidLoad
+    [self at_viewDidLoad];
+}
+
 // pop
 - (UIViewController *)at_popViewControllerAnimated:(BOOL)animated
 {
@@ -305,19 +235,66 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
     [[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:screem]];
     [self at_pushViewController:viewController animated:animated];
 }
-// getter && setter
-- (CGFloat)at_interactiveMinMoveDistance
+#pragma mark - Delegate
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    NSNumber *distance = objc_getAssociatedObject(self, _cmd);
-    if (distance) {
-        return [distance floatValue];
+    return YES;
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (!self._ableInteractivePop) {
+        return NO;
     }
-    return 200.00;
+    CGPoint beginningLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
+    if (self.at_interactiveMinMoveDistance > 0 && beginningLocation.x > self.at_interactiveMinMoveDistance) {
+        return NO;
+    }
+    if (self.childViewControllers.count == 1) {
+        return NO;
+    }
+    if ([[self valueForKey:@"_isTransitioning"] boolValue]) {
+        return NO;
+    }
+    return YES;
 }
-- (void)at_setInteractiveMinMoveDistance:(CGFloat)at_interactiveMinMoveDistance
+
+#pragma mark - private methods
+- (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer
 {
-    objc_setAssociatedObject(self, @selector(at_interactiveMinMoveDistance), @(at_interactiveMinMoveDistance), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    CGFloat progress = [recognizer translationInView:recognizer.view].x / recognizer.view.bounds.size.width;
+    progress = MIN(1.0, MAX(0.0, progress));
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        
+        self.at_interactivePopTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
+        self._delegate.interactivePopTransition = self.at_interactivePopTransition;
+        
+        [CATPageManager shareManager].animationStatus = CATNavigationPopAnimationDrag;
+        
+        [self popViewControllerAnimated:YES];
+        
+    } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        [self.at_interactivePopTransition updateInteractiveTransition:progress];
+    } else if (recognizer.state == UIGestureRecognizerStateEnded ||
+               recognizer.state == UIGestureRecognizerStateCancelled) {
+        if (progress > 0.5) {
+            [CATPageManager shareManager].animationStatus = CATNavigationPopAnimationDragFinished;
+            [self.at_interactivePopTransition finishInteractiveTransition];
+        } else {
+            [CATPageManager shareManager].animationStatus = CATNavigationPopAnimationDragCalcelled;
+            [self.at_interactivePopTransition cancelInteractiveTransition];
+        }
+        self.at_interactivePopTransition = nil;
+    }
 }
+
+CATAssociatedBoolProperty(_ableInteractivePop, _setAbleInteractivePop:);
+CATAssociatedIntProperty(at_interactiveMinMoveDistance, at_setInteractiveMinMoveDistance:);
+
+CATAssociatedProperty(_customPopGestureRecognizer, _setCustomPopGestureRecognizer:, UIPanGestureRecognizer *);
+CATAssociatedProperty(_delegate, _setDelegate:, CATNavigationControllerDelegate *);
+CATAssociatedProperty(at_interactivePopTransition, at_setInteractivePopTransition:, UIPercentDrivenInteractiveTransition *);
+
 @end
 
 
@@ -347,7 +324,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 
         CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
 
-        navigationController.ableInteractivePop = !self.at_disableInteractivePop;
+        navigationController._ableInteractivePop = !self.at_disableInteractivePop;
 
         if (self.at_navigationBarBackgroundColor) {
             [self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];

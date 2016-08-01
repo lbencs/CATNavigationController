@@ -10,19 +10,13 @@
 
 @class CATNavigationController;
 
-@protocol CATNavigationControllerDelegate <UINavigationControllerDelegate>
-@end
-
-
 @interface CATNavigationController : UINavigationController
-
 @end
 
 
 @interface UINavigationController (CATNavigationController)
 
-@property (nullable, nonatomic, weak) id<CATNavigationControllerDelegate> at_delegate;
-
+@property (nonatomic, strong, readonly) UIPercentDrivenInteractiveTransition *at_interactivePopTransition;
 @property (nonatomic, assign, setter=at_setInteractiveMinMoveDistance:) CGFloat at_interactiveMinMoveDistance;
 
 - (nullable NSArray<__kindof UIViewController *> *)at_popViewController:(UIViewController *)viewController animated:(BOOL)animated;
