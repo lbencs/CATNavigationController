@@ -7,8 +7,11 @@
 //
 
 #import "CATNavigationBar.h"
+#import "CATProvider.h"
+
 
 @implementation CATNavigationBar
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

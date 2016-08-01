@@ -14,37 +14,43 @@
 #import "CATProvider.h"
 #import "UINavigationBar+CATCustom.h"
 
-#define CATAssociatedProperty(_get, _set, _type)\
-\
-- (instancetype)_get{\
-return objc_getAssociatedObject(self, _cmd);\
-}\
-\
-- (void)_set(_type)value{\
-objc_setAssociatedObject(self, @selector(_get), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
-}
+#define CATAssociatedProperty(_get, _set, _type)                                                   \
+                                                                                                   \
+    -(instancetype)_get                                                                            \
+    {                                                                                              \
+        return objc_getAssociatedObject(self, _cmd);                                               \
+    }                                                                                              \
+                                                                                                   \
+    -(void)_set(_type) value                                                                       \
+    {                                                                                              \
+        objc_setAssociatedObject(self, @selector(_get), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
+    }
 
 
-#define CATAssociatedBoolProperty(_get, _set)\
-\
-- (BOOL)_get{\
-return [objc_getAssociatedObject(self, _cmd) boolValue];\
-}\
-\
-- (void)_set(BOOL)value{\
-objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
-}
+#define CATAssociatedBoolProperty(_get, _set)                                                         \
+                                                                                                      \
+    -(BOOL)_get                                                                                       \
+    {                                                                                                 \
+        return [objc_getAssociatedObject(self, _cmd) boolValue];                                      \
+    }                                                                                                 \
+                                                                                                      \
+    -(void)_set(BOOL) value                                                                           \
+    {                                                                                                 \
+        objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
+    }
 
 
-#define CATAssociatedIntProperty(_get, _set)\
-\
-- (NSInteger)_get{\
-return [objc_getAssociatedObject(self, _cmd) integerValue];\
-}\
-\
-- (void)_set(NSInteger)value{\
-objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);\
-}
+#define CATAssociatedIntProperty(_get, _set)                                                          \
+                                                                                                      \
+    -(NSInteger)_get                                                                                  \
+    {                                                                                                 \
+        return [objc_getAssociatedObject(self, _cmd) integerValue];                                   \
+    }                                                                                                 \
+                                                                                                      \
+    -(void)_set(NSInteger) value                                                                      \
+    {                                                                                                 \
+        objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
+    }
 
 
 typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
@@ -315,37 +321,38 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 - (void)at_viewWillAppear:(BOOL)animated
 {
     [self at_viewWillAppear:animated];
-	
-	[[UIApplication sharedApplication] setStatusBarStyle:self.at_statusBarStyle animated:YES];
-	
-	if ([self.navigationController isKindOfClass:[CATNavigationController class]]) {
-		
-		[self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
-		[self.tabBarController.tabBar setHidden:!self.at_showTabBar];
-		
-		CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
-		navigationController.ableInteractivePop = !self.at_disableInteractivePop;
-		
-		if (self.at_navigationBarBackgroundColor) {
-			[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
-		} else {
-			[self.navigationController.navigationBar at_setBackgroundColor:[UINavigationBar appearance].backgroundColor];
-		}
-		
-		if (self.at_navigationBarBottomLineColor) {
-			[self.navigationController.navigationBar at_setBottomLineColor:self.at_navigationBarBottomLineColor];
-		} else {
-			[self.navigationController.navigationBar at_setBottomLineColor:[UINavigationBar appearance].backgroundColor];
-		}
-	}
+
+    [[UIApplication sharedApplication] setStatusBarStyle:self.at_statusBarStyle animated:YES];
+
+    if ([self.navigationController isKindOfClass:[CATNavigationController class]] && ![self isKindOfClass:NSClassFromString(@"GXQNetworkLoadingViewController")] && ![self isKindOfClass:NSClassFromString(@"GXQNetworkFailedViewController")]) {
+        [self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
+        [self.tabBarController.tabBar setHidden:!self.at_showTabBar];
+
+        CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
+
+        navigationController.ableInteractivePop = !self.at_disableInteractivePop;
+
+        if (self.at_navigationBarBackgroundColor) {
+            [self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
+        } else {
+            [self.navigationController.navigationBar at_setBackgroundColor:[UINavigationBar appearance].backgroundColor];
+        }
+
+        if (self.at_navigationBarBottomLineColor) {
+            [self.navigationController.navigationBar at_setBottomLineColor:self.at_navigationBarBottomLineColor];
+        } else {
+            [self.navigationController.navigationBar at_setBottomLineImage:[UINavigationBar appearance].shadowImage];
+        }
+    }
 }
 
-CATAssociatedBoolProperty(at_hiddenNavigationBar, at_setHiddenNavigationBar:)
-CATAssociatedBoolProperty(at_showTabBar, at_setShowTabBar:)
-CATAssociatedBoolProperty(at_disableInteractivePop, at_setAbleInteractivePop:)
+CATAssociatedBoolProperty(at_hiddenNavigationBar, at_setHiddenNavigationBar:);
+CATAssociatedBoolProperty(at_showTabBar, at_setShowTabBar:);
+CATAssociatedBoolProperty(at_disableInteractivePop, at_setAbleInteractivePop:);
+//CATAssociatedBoolProperty(at_translucent, at_setTranslucent:);
 
-CATAssociatedIntProperty(at_statusBarStyle, at_setStatusBarStyle:)
+CATAssociatedIntProperty(at_statusBarStyle, at_setStatusBarStyle:);
 
-CATAssociatedProperty(at_navigationBarBackgroundColor, at_setNavigationBarBackgroundColor:, UIColor *)
-CATAssociatedProperty(at_navigationBarBottomLineColor, at_setNavigationBarBottomLineColor:, UIColor *)
+CATAssociatedProperty(at_navigationBarBackgroundColor, at_setNavigationBarBackgroundColor:, UIColor *);
+CATAssociatedProperty(at_navigationBarBottomLineColor, at_setNavigationBarBottomLineColor:, UIColor *);
 @end

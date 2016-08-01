@@ -13,13 +13,15 @@
 @protocol CATNavigationControllerDelegate <UINavigationControllerDelegate>
 @end
 
+
 @interface CATNavigationController : UINavigationController
 
 @end
 
+
 @interface UINavigationController (CATNavigationController)
 
-@property (nonatomic, weak) id<CATNavigationControllerDelegate> at_delegate;
+@property (nullable, nonatomic, weak) id<CATNavigationControllerDelegate> at_delegate;
 @property (nonatomic, assign, setter=at_setInteractiveMinMoveDistance:) CGFloat at_interactiveMinMoveDistance;
 
 - (void)at_pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
@@ -36,10 +38,12 @@
 
 //default is NO, when is YES, show the NavigationBar in the next page.
 @property (nonatomic, assign, setter=at_setHiddenNavigationBar:) BOOL at_hiddenNavigationBar;
-@property (nonatomic, strong, setter=at_setNavigationBarBackgroundColor:) UIColor *at_navigationBarBackgroundColor;
-@property (nonatomic, strong, setter=at_setNavigationBarBottomLineColor:) UIColor *at_navigationBarBottomLineColor;
+@property (nullable, nonatomic, strong, setter=at_setNavigationBarBackgroundColor:) UIColor *at_navigationBarBackgroundColor;
+@property (nullable, nonatomic, strong, setter=at_setNavigationBarBottomLineColor:) UIColor *at_navigationBarBottomLineColor;
 //default is NO
 @property (nonatomic, assign, setter=at_setAbleInteractivePop:) BOOL at_disableInteractivePop;
 //default is UIStatusBarStyleDefault
 @property (nonatomic, assign, setter=at_setStatusBarStyle:) UIStatusBarStyle at_statusBarStyle;
+
+@property (nonatomic, assign, setter=at_setTranslucent:) BOOL at_translucent;
 @end

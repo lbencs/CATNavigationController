@@ -16,69 +16,74 @@
 
 #define A (0)
 
+
 @implementation CATAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-	
-	UIWindow *keyWindow = [[UIWindow alloc] init];
-	[keyWindow makeKeyAndVisible];
-	
-	
-//	UIImage *image = [UIImage imageNamed:@"comment_ico_back_pre"];
-//	image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
-//	[[UINavigationBar appearance] setBackIndicatorImage:image];
-//	
-//	image = [UIImage imageNamed:@"comment_ico_back_normal"];
-//	image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:image];
-	
-	UITabBarController *tvc = [[UITabBarController alloc] init];
-	UITabBarItem *item1 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
-	item1.title = @"Cat";
-	CATViewController *vc1 = [[CATViewController alloc] init];
-	
-	UITabBarItem *item2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1];
-	item2.title = @"Dog";
-	CATDogTabViewController *vc2 = [[CATDogTabViewController alloc] init];
-	
-	UITabBarItem *item3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:2];
-	CATCatTableViewController *vc3 = [[CATCatTableViewController alloc] init];
-	item3.title = @"CCat";
-	
+
+    UIWindow *keyWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [keyWindow makeKeyAndVisible];
+
+    //	UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:[UITableViewController new]];
+    //	keyWindow.rootViewController = nvc;
+
+    self.window = keyWindow;
+    //	return YES;
+
+    //	UIImage *image = [UIImage imageNamed:@"comment_ico_back_pre"];
+    //	image = [image imageWithRenderingMode: UIImageRenderingModeAlwaysOriginal];
+    //	[[UINavigationBar appearance] setBackIndicatorImage:image];
+    //
+    //	image = [UIImage imageNamed:@"comment_ico_back_normal"];
+    //	image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:image];
+
+    UITabBarController *tvc = [[UITabBarController alloc] init];
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];
+    item1.title = @"Cat";
+    CATViewController *vc1 = [[CATViewController alloc] init];
+
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:1];
+    item2.title = @"Dog";
+    CATDogTabViewController *vc2 = [[CATDogTabViewController alloc] init];
+
+    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:2];
+    CATCatTableViewController *vc3 = [[CATCatTableViewController alloc] init];
+    item3.title = @"CCat";
+
 #if A
-	CATWrapNavigationController *nvc1 = [[CATWrapNavigationController alloc] initWithRootViewController:vc1];
-	nvc1.tabBarItem = item1;
-	
-	CATWrapNavigationController *nvc2 = [[CATWrapNavigationController alloc] initWithRootViewController:vc2];
-	nvc2.tabBarItem = item2;
-	
-	CATWrapNavigationController *nvc3 = [[CATWrapNavigationController alloc] initWithRootViewController:vc3];
-	nvc3.tabBarItem = item3;
-	
-	tvc.viewControllers = @[nvc1,nvc2,nvc3];
-	
-	CATCoreNavigationController *corNvc = [[CATCoreNavigationController alloc] initWithRootViewController:tvc];
-	
-	keyWindow.rootViewController = corNvc;
+    CATWrapNavigationController *nvc1 = [[CATWrapNavigationController alloc] initWithRootViewController:vc1];
+    nvc1.tabBarItem = item1;
+
+    CATWrapNavigationController *nvc2 = [[CATWrapNavigationController alloc] initWithRootViewController:vc2];
+    nvc2.tabBarItem = item2;
+
+    CATWrapNavigationController *nvc3 = [[CATWrapNavigationController alloc] initWithRootViewController:vc3];
+    nvc3.tabBarItem = item3;
+
+    tvc.viewControllers = @[ nvc1, nvc2, nvc3 ];
+
+    CATCoreNavigationController *corNvc = [[CATCoreNavigationController alloc] initWithRootViewController:tvc];
+
+    keyWindow.rootViewController = corNvc;
 #else
-	CATNavigationController *nvc1 = [[CATNavigationController alloc] initWithRootViewController:vc1];
-	nvc1.tabBarItem = item1;
-	
-	CATNavigationController *nvc2 = [[CATNavigationController alloc] initWithRootViewController:vc2];
-	nvc2.tabBarItem = item2;
-	
-	CATNavigationController *nvc3 = [[CATNavigationController alloc] initWithRootViewController:vc3];
-	nvc3.tabBarItem = item3;
-	
-	tvc.viewControllers = @[nvc1,nvc2,nvc3];
-	
-	keyWindow.rootViewController = tvc;
+    CATNavigationController *nvc1 = [[CATNavigationController alloc] initWithRootViewController:vc1];
+    nvc1.tabBarItem = item1;
+
+    CATNavigationController *nvc2 = [[CATNavigationController alloc] initWithRootViewController:vc2];
+    nvc2.tabBarItem = item2;
+
+    CATNavigationController *nvc3 = [[CATNavigationController alloc] initWithRootViewController:vc3];
+    nvc3.tabBarItem = item3;
+
+    tvc.viewControllers = @[ nvc1, nvc2, nvc3 ];
+
+    keyWindow.rootViewController = tvc;
 #endif
-	
-	self.window = keyWindow;
-	
+
+
     return YES;
 }
 

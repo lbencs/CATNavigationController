@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CATNavigationController: 0bbff7b537b0efd828dcc21f5e9c82d9efb85592
+  CATNavigationController: 344d4432255c6c9f3bc089b06794601933216315
 
 PODFILE CHECKSUM: 24cb956cb6639014e6bb8eb9c73a6e7ba5ea103a
 
