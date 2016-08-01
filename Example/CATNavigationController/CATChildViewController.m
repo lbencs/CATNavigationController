@@ -75,16 +75,16 @@ static int i = 0;
 - (void)btnClick2:(UIButton *)sender
 {
     if (self.topVC) {
-        [self.navigationController at_popToViewController:self.topVC animated:YES];
+        [self.navigationController popToViewController:self.topVC animated:YES];
     }
 }
 - (void)btnClick4:(UIButton *)sender
 {
-    [self.navigationController at_popToRootViewControllerAnimated:NO];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 - (void)btnClick:(UIButton *)sender
 {
-    [self.navigationController at_popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -100,7 +100,7 @@ static int i = 0;
     } else {
         vc.view.backgroundColor = [UIColor grayColor];
     }
-    [self.navigationController at_pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

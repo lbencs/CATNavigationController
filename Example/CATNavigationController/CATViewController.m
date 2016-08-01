@@ -59,6 +59,6 @@
 {
     NSLog(@"%@", self.navigationController);
     CATChildViewController *nvc = [[CATChildViewController alloc] init];
-    [self.navigationController at_pushViewController:nvc animated:YES];
+    [self.navigationController pushViewController:nvc animated:YES];
 }
 @end

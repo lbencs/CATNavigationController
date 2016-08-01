@@ -73,7 +73,7 @@
 	NSLog(@"%@",self.navigationController);
 	UIViewController *nvc = [[UIViewController alloc] init];
 	nvc.view.backgroundColor = [UIColor whiteColor];
-	[self.navigationController at_pushViewController:nvc animated:YES];
+	[self.navigationController pushViewController:nvc animated:YES];
 }
 
 /*

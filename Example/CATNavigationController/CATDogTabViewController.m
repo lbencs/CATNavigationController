@@ -70,10 +70,10 @@
 	NSLog(@"%@",self.navigationController);
 	CATDogChildViewController *nvc = [[CATDogChildViewController alloc] init];
 	if (indexPath.row == 0) {
-		[self.navigationController  at_pushViewController:nvc animated:YES];
+		[self.navigationController  pushViewController:nvc animated:YES];
 	}else{
 		nvc.view.backgroundColor = [UIColor yellowColor];
-		[self.navigationController at_pushViewController:nvc animated:YES];
+		[self.navigationController pushViewController:nvc animated:YES];
 	}
 }
 

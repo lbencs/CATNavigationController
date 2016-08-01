@@ -232,6 +232,19 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
         CATSwizzeMethod([self class],
                         @selector(popViewControllerAnimated:),
                         @selector(at_popViewControllerAnimated:));
+        
+        CATSwizzeMethod([self class],
+                        @selector(popToViewController:animated:),
+                        @selector(at_popToViewController:animated:));
+        
+        CATSwizzeMethod([self class],
+                        @selector(popToRootViewControllerAnimated:),
+                        @selector(at_popToRootViewControllerAnimated:));
+        
+
+        
+        CATSwizzeMethod([self class], @selector(pushViewController:animated:),
+                        @selector(at_pushViewController:animated:));
     });
 }
 // pop
@@ -244,7 +257,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 }
 - (NSArray<UIViewController *> *)at_popToViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    NSArray<__kindof UIViewController *> *viewControllers = [self popToViewController:viewController animated:animated];
+    NSArray<__kindof UIViewController *> *viewControllers = [self at_popToViewController:viewController animated:animated];
     for (int i = 0; i < viewControllers.count - 1; i++) {
         [[CATPageManager shareManager] pop];
     }
@@ -273,7 +286,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
 }
 - (NSArray<UIViewController *> *)at_popToRootViewControllerAnimated:(BOOL)animated
 {
-    NSArray<__kindof UIViewController *> *viewControllers = [self popToRootViewControllerAnimated:animated];
+    NSArray<__kindof UIViewController *> *viewControllers = [self at_popToRootViewControllerAnimated:animated];
     for (int i = 0; i < viewControllers.count - 1; i++) {
         [[CATPageManager shareManager] pop];
     }
@@ -290,7 +303,7 @@ typedef NS_ENUM(NSInteger, CATNavigationPopAnimation) {
         screem = self.view;
     }
     [[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:screem]];
-    [self pushViewController:viewController animated:animated];
+    [self at_pushViewController:viewController animated:animated];
 }
 // getter && setter
 - (CGFloat)at_interactiveMinMoveDistance

@@ -30,7 +30,7 @@
 - (void)btnClick:(UIButton *)sender{
     UIViewController *vc = [[UIViewController alloc] init];
 	vc.view.backgroundColor = [UIColor whiteColor];
-    [self.navigationController at_pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animated{
 	[super viewWillAppear:animated];
