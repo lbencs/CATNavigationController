@@ -15,43 +15,14 @@
 #import <objc/runtime.h>
 #import "UINavigationBar+CATCustom.h"
 
-#define CATAssociatedProperty(_get, _set, _type)                                                   \
-                                                                                                   \
-    -(instancetype)_get                                                                            \
-    {                                                                                              \
-        return objc_getAssociatedObject(self, _cmd);                                               \
-    }                                                                                              \
-                                                                                                   \
-    -(void)_set(_type) value                                                                       \
-    {                                                                                              \
-        objc_setAssociatedObject(self, @selector(_get), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
-    }
+#define CATAssociatedProperty(_get, _set, _type) -(instancetype)_get{return objc_getAssociatedObject(self, _cmd);}\
+-(void)_set(_type) value {objc_setAssociatedObject(self, @selector(_get), value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
 
+#define CATAssociatedBoolProperty(_get, _set) -(BOOL)_get{ return [objc_getAssociatedObject(self, _cmd) boolValue];} \
+-(void)_set(BOOL) value { objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
 
-#define CATAssociatedBoolProperty(_get, _set)                                                         \
-                                                                                                      \
-    -(BOOL)_get                                                                                       \
-    {                                                                                                 \
-        return [objc_getAssociatedObject(self, _cmd) boolValue];                                      \
-    }                                                                                                 \
-                                                                                                      \
-    -(void)_set(BOOL) value                                                                           \
-    {                                                                                                 \
-        objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
-    }
-
-
-#define CATAssociatedIntProperty(_get, _set)                                                          \
-                                                                                                      \
-    -(NSInteger)_get                                                                                  \
-    {                                                                                                 \
-        return [objc_getAssociatedObject(self, _cmd) integerValue];                                   \
-    }                                                                                                 \
-                                                                                                      \
-    -(void)_set(NSInteger) value                                                                      \
-    {                                                                                                 \
-        objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC); \
-    }
+#define CATAssociatedIntProperty(_get, _set) -(NSInteger)_get {return [objc_getAssociatedObject(self, _cmd) integerValue];}\
+-(void)_set(NSInteger) value { objc_setAssociatedObject(self, @selector(_get), @(value), OBJC_ASSOCIATION_RETAIN_NONATOMIC);}
 
 
 @implementation CATNavigationController
@@ -82,7 +53,7 @@
             }
             [CATPageManager shareManager].animationStatus = CATNavigationPopAnimationPop;
         }];
-    } else if (operation = UINavigationControllerOperationPush) {
+    } else if (operation == UINavigationControllerOperationPush) {
         return [[CATPushTransitionAnimation alloc] init];
     } else if (operation == UINavigationControllerOperationNone) {
         NSLog(@"none");
@@ -119,12 +90,10 @@
 @end
 
 @implementation UINavigationController (CATNavigationController)
-
 + (void)load
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         CATSwizzeMethod([self class],
                         @selector(viewDidLoad),
                         @selector(at_viewDidLoad));
@@ -141,13 +110,17 @@
                         @selector(popToRootViewControllerAnimated:),
                         @selector(at_popToRootViewControllerAnimated:));
         
-
-        
         CATSwizzeMethod([self class], @selector(pushViewController:animated:),
                         @selector(at_pushViewController:animated:));
     });
 }
 
+- (void)at_undoDelegate
+{
+    self.delegate = self._delegate;
+}
+
+// viewDidLoad
 - (void)at_viewDidLoad
 {
     //设置动画代理
@@ -166,7 +139,7 @@
     [gestureView addGestureRecognizer:popRecognizer];
     
     id target = gesture.delegate;
-    [popRecognizer addTarget:self action:@selector(handleControllerPop:)];
+    [popRecognizer addTarget:self action:@selector(_handleControllerPop:)];
     popRecognizer.maximumNumberOfTouches = 1;
     self._customPopGestureRecognizer = popRecognizer;
 
@@ -180,7 +153,7 @@
 // pop
 - (UIViewController *)at_popViewControllerAnimated:(BOOL)animated
 {
-    if (!animated) {
+    if (!animated && [self _useCustomNavigationAnimation]) {
         [[CATPageManager shareManager] pop];
     }
     return [self at_popViewControllerAnimated:animated];
@@ -188,18 +161,37 @@
 - (NSArray<UIViewController *> *)at_popToViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     NSArray<__kindof UIViewController *> *viewControllers = [self at_popToViewController:viewController animated:animated];
-    for (int i = 0; i < viewControllers.count - 1; i++) {
-        [[CATPageManager shareManager] pop];
-    }
-    if (!animated) {
-        [[CATPageManager shareManager] pop];
+    
+    if ([self _useCustomNavigationAnimation]) {
+        for (int i = 0; i < viewControllers.count - 1; i++) {
+            [[CATPageManager shareManager] pop];
+        }
+        if (!animated) {
+            [[CATPageManager shareManager] pop];
+        }
     }
     return viewControllers;
 }
-- (NSArray<UIViewController *> *)at_popViewController:(UIViewController *)viewController animated:(BOOL)animated
+- (NSArray<UIViewController *> *)at_popToRootViewControllerAnimated:(BOOL)animated
+{
+    NSArray<__kindof UIViewController *> *viewControllers = [self at_popToRootViewControllerAnimated:animated];
+    
+    if ([self _useCustomNavigationAnimation]) {
+        for (int i = 0; i < viewControllers.count - 1; i++) {
+            [[CATPageManager shareManager] pop];
+        }
+        if (!animated) {
+            [[CATPageManager shareManager] pop];
+        }
+    }
+    return viewControllers;
+}
+//  add
+- (NSArray<UIViewController *> *)popViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     NSArray<__kindof UIViewController *> *viewControllers = self.viewControllers;
     __block UIViewController *popToVC = nil;
+    
     [viewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController *_Nonnull obj, NSUInteger idx, BOOL *_Nonnull stop) {
         if ([obj isEqual:viewController]) {
             if (idx > 0) {
@@ -208,33 +200,27 @@
             *stop = YES;
         }
     }];
+    
     if (popToVC) {
         return [self at_popToViewController:popToVC animated:animated];
     } else {
         return [self at_popToRootViewControllerAnimated:animated];
     }
 }
-- (NSArray<UIViewController *> *)at_popToRootViewControllerAnimated:(BOOL)animated
-{
-    NSArray<__kindof UIViewController *> *viewControllers = [self at_popToRootViewControllerAnimated:animated];
-    for (int i = 0; i < viewControllers.count - 1; i++) {
-        [[CATPageManager shareManager] pop];
-    }
-    if (!animated) {
-        [[CATPageManager shareManager] pop];
-    }
-    return viewControllers;
-}
 // push
 - (void)at_pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    UIView *screem = self.tabBarController.view;
-    if (!screem) {
-        screem = self.view;
+    if ([self _useCustomNavigationAnimation]) {
+        UIView *screem = self.tabBarController.view;
+        if (!screem) {
+            screem = self.view;
+        }
+        [[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:screem]];
+        
     }
-    [[CATPageManager shareManager] push:[UIImage at_screenShotImageWithCaptureView:screem]];
     [self at_pushViewController:viewController animated:animated];
 }
+
 #pragma mark - Delegate
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -260,7 +246,7 @@
 }
 
 #pragma mark - private methods
-- (void)handleControllerPop:(UIPanGestureRecognizer *)recognizer
+- (void)_handleControllerPop:(UIPanGestureRecognizer *)recognizer
 {
     CGFloat progress = [recognizer translationInView:recognizer.view].x / recognizer.view.bounds.size.width;
     progress = MIN(1.0, MAX(0.0, progress));
@@ -287,10 +273,14 @@
         self.at_interactivePopTransition = nil;
     }
 }
+- (BOOL)_useCustomNavigationAnimation
+{
+    return self._delegate != nil;
+//    return [self.delegate isKindOfClass:[CATNavigationControllerDelegate class]];
+}
 
 CATAssociatedBoolProperty(_ableInteractivePop, _setAbleInteractivePop:);
 CATAssociatedIntProperty(at_interactiveMinMoveDistance, at_setInteractiveMinMoveDistance:);
-
 CATAssociatedProperty(_customPopGestureRecognizer, _setCustomPopGestureRecognizer:, UIPanGestureRecognizer *);
 CATAssociatedProperty(_delegate, _setDelegate:, CATNavigationControllerDelegate *);
 CATAssociatedProperty(at_interactivePopTransition, at_setInteractivePopTransition:, UIPercentDrivenInteractiveTransition *);
@@ -343,9 +333,8 @@ CATAssociatedProperty(at_interactivePopTransition, at_setInteractivePopTransitio
 CATAssociatedBoolProperty(at_hiddenNavigationBar, at_setHiddenNavigationBar:);
 CATAssociatedBoolProperty(at_showTabBar, at_setShowTabBar:);
 CATAssociatedBoolProperty(at_disableInteractivePop, at_setAbleInteractivePop:);
-
 CATAssociatedIntProperty(at_statusBarStyle, at_setStatusBarStyle:);
-
 CATAssociatedProperty(at_navigationBarBackgroundColor, at_setNavigationBarBackgroundColor:, UIColor *);
 CATAssociatedProperty(at_navigationBarBottomLineColor, at_setNavigationBarBottomLineColor:, UIColor *);
+CATAssociatedProperty(at_delegate, at_setDelegate:, id);
 @end

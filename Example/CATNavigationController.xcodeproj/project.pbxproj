@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		554C8B101D50319D007187C1 /* CATCustomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554C8B0F1D50319D007187C1 /* CATCustomTableViewController.m */; };
+		554C8B131D5036E2007187C1 /* CATCustomChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554C8B121D5036E2007187C1 /* CATCustomChildViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -44,6 +46,10 @@
 		098B59F74FDEB446DD1390EF /* libPods-CATNavigationController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CATNavigationController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D95567263F61B08C266CC3 /* libPods-CATNavigationController_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CATNavigationController_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EDF8E6EDDBB38B8D1F16CB /* CATNavigationController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CATNavigationController.podspec; path = ../CATNavigationController.podspec; sourceTree = "<group>"; };
+		554C8B0E1D50319D007187C1 /* CATCustomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATCustomTableViewController.h; sourceTree = "<group>"; };
+		554C8B0F1D50319D007187C1 /* CATCustomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATCustomTableViewController.m; sourceTree = "<group>"; };
+		554C8B111D5036E2007187C1 /* CATCustomChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATCustomChildViewController.h; sourceTree = "<group>"; };
+		554C8B121D5036E2007187C1 /* CATCustomChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATCustomChildViewController.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* CATNavigationController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CATNavigationController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,6 +162,10 @@
 				BDA046751D1269B9000F3B61 /* CATDogChildViewController.m */,
 				BDA97D591D11480000CA862A /* CATCatTableViewController.h */,
 				BDA97D5A1D11480000CA862A /* CATCatTableViewController.m */,
+				554C8B0E1D50319D007187C1 /* CATCustomTableViewController.h */,
+				554C8B0F1D50319D007187C1 /* CATCustomTableViewController.m */,
+				554C8B111D5036E2007187C1 /* CATCustomChildViewController.h */,
+				554C8B121D5036E2007187C1 /* CATCustomChildViewController.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -516,9 +526,11 @@
 				6003F59E195388D20070C39A /* CATAppDelegate.m in Sources */,
 				BDA046761D1269B9000F3B61 /* CATDogChildViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* CATViewController.m in Sources */,
+				554C8B101D50319D007187C1 /* CATCustomTableViewController.m in Sources */,
 				BDA97D5B1D11480000CA862A /* CATCatTableViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				BDA97D581D11462C00CA862A /* CATDogTabViewController.m in Sources */,
+				554C8B131D5036E2007187C1 /* CATCustomChildViewController.m in Sources */,
 				BDA046791D127594000F3B61 /* CATChildViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

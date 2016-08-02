@@ -18,8 +18,8 @@
 
 @property (nonatomic, strong, readonly) UIPercentDrivenInteractiveTransition *at_interactivePopTransition;
 @property (nonatomic, assign, setter=at_setInteractiveMinMoveDistance:) CGFloat at_interactiveMinMoveDistance;
-
-- (nullable NSArray<__kindof UIViewController *> *)at_popViewController:(UIViewController *)viewController animated:(BOOL)animated;
+- (void)at_undoDelegate;
+- (nullable NSArray<__kindof UIViewController *> *)popViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
 @end
 
@@ -38,4 +38,5 @@
 //default is UIStatusBarStyleDefault
 @property (nonatomic, assign, setter=at_setStatusBarStyle:) UIStatusBarStyle at_statusBarStyle;
 
+@property (nullable, nonatomic, weak) id<UINavigationBarDelegate>at_delegate;
 @end

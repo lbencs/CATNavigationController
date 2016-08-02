@@ -65,6 +65,14 @@ static int i = 0;
     [button setTitle:[NSString stringWithFormat:@"Pop With No Animation"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(btnClick3:) forControlEvents:UIControlEventTouchUpInside];
 
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(50, 350, 300, 44);
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
+    [button setTitle:[NSString stringWithFormat:@"Pop View Controller %@", self] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(btnClick5:) forControlEvents:UIControlEventTouchUpInside];
+
+    
     i++;
 }
 
@@ -85,6 +93,10 @@ static int i = 0;
 - (void)btnClick:(UIButton *)sender
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (void)btnClick5:(UIButton *)sender
+{
+    [self.navigationController popViewController:self animated:YES];
 }
 - (void)didReceiveMemoryWarning
 {

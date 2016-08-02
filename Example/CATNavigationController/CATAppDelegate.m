@@ -12,6 +12,7 @@
 #import "CATCatTableViewController.h"
 #import "CATCoreNavigationController.h"
 #import "CATWrapViewController.h"
+#import "CATCustomTableViewController.h"
 #import <CATNavigationController/CATNavigationController.h>
 
 #define A (0)
@@ -52,6 +53,12 @@
     UITabBarItem *item3 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMostViewed tag:2];
     CATCatTableViewController *vc3 = [[CATCatTableViewController alloc] init];
     item3.title = @"CCat";
+    
+    UITabBarItem *item4 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:3];
+    CATCustomTableViewController *vc4 = [[CATCustomTableViewController alloc] init];
+    item4.title = @"CCustom";
+    
+    
 
 #if A
     CATWrapNavigationController *nvc1 = [[CATWrapNavigationController alloc] initWithRootViewController:vc1];
@@ -77,8 +84,11 @@
 
     CATNavigationController *nvc3 = [[CATNavigationController alloc] initWithRootViewController:vc3];
     nvc3.tabBarItem = item3;
+    
+    CATNavigationController *nvc4 = [[CATNavigationController alloc] initWithRootViewController:vc4];
+    nvc4.tabBarItem = item4;
 
-    tvc.viewControllers = @[ nvc1, nvc2, nvc3 ];
+    tvc.viewControllers = @[ nvc1, nvc2, nvc3, nvc4 ];
 
     keyWindow.rootViewController = tvc;
 #endif
