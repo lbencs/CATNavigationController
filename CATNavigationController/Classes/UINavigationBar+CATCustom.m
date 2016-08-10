@@ -29,10 +29,16 @@ static char CATCustomEmptyImageKey;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        CATSwizzeMethod(self, @selector(setBackgroundImage:), @selector(at_setBackgroundImage:));
-        CATSwizzeMethod(self, @selector(setBackgroundImage:forBarMetrics:), @selector(at_setBackgroundImage:forBarMetrics:));
-        CATSwizzeMethod(self, @selector(setBackgroundImage:forBarPosition:barMetrics:), @selector(at_setBackgroundImage:forBarPosition:barMetrics:));
+        //        CATSwizzeMethod(self, @selector(setBackgroundImage:), @selector(at_setBackgroundImage:));
+        //        CATSwizzeMethod(self, @selector(setBackgroundImage:forBarMetrics:), @selector(at_setBackgroundImage:forBarMetrics:));
+        //        CATSwizzeMethod(self, @selector(setBackgroundImage:forBarPosition:barMetrics:), @selector(at_setBackgroundImage:forBarPosition:barMetrics:));
+        CATSwizzeMethod(self, @selector(setTranslucent:), @selector(at_setTranslucent:));
     });
+}
+- (void)at_setTranslucent:(BOOL)translucent
+{
+    [self at_setTranslucent:translucent];
+    [self _clearBackgroundColorAtView:self];
 }
 - (void)at_setBackgroundImage:(UIImage *)image
 {
@@ -40,7 +46,6 @@ static char CATCustomEmptyImageKey;
 }
 - (void)at_setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics
 {
-    //	NSAssert(backgroundImage != nil, @"image not nil");
     [self at_setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
 }
 
@@ -99,7 +104,7 @@ static char CATCustomEmptyImageKey;
         if ([v isKindOfClass:NSClassFromString(@"_UINavigationBarBackground")]) {
             v.backgroundColor = [UIColor clearColor];
             return;
-        }else{
+        } else {
             [self _clearBackgroundColorAtView:v];
         }
     }
@@ -109,7 +114,7 @@ static char CATCustomEmptyImageKey;
 - (UIView *)_maskLayer
 {
     UIView *layer = objc_getAssociatedObject(self, _cmd);
-    
+
     [self _clearBackgroundColorAtView:self];
 
     if (!layer) {

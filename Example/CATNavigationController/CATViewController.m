@@ -9,6 +9,8 @@
 #import "CATViewController.h"
 #import "CATChildViewController.h"
 #import "CATNavigationController.h"
+#import "CATChildTableViewController.h"
+#import "CATChildWebViewController.h"
 #import "UINavigationBar+CATCustom.h"
 
 
@@ -27,9 +29,6 @@
     self.at_showTabBar = YES;
     self.at_navigationBarBackgroundColor = [UIColor yellowColor];
     self.at_navigationBarBottomLineColor = [UIColor redColor];
-    self.navigationController.navigationBar.translucent = YES;
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.tabBarController.tabBar.translucent = YES;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -53,12 +52,25 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"Push to UITableViewController.";
+    } else if (indexPath.row == 1) {
+        cell.textLabel.text = @"Push To UIWebViewController";
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@", self.navigationController);
-    CATChildViewController *nvc = [[CATChildViewController alloc] init];
-    [self.navigationController pushViewController:nvc animated:YES];
+    if (indexPath.row == 0) {
+        CATChildTableViewController *vc = [[CATChildTableViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    } else if (indexPath.row == 1) {
+        CATChildWebViewController *vc = [[CATChildWebViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        CATChildViewController *nvc = [[CATChildViewController alloc] init];
+        [self.navigationController pushViewController:nvc animated:YES];
+    }
 }
 @end

@@ -29,15 +29,18 @@
     bottomView.backgroundColor = [UIColor blackColor];
     [containerView insertSubview:bottomView belowSubview:fromVC.view];
 #if DEBUG
-    NSLog(@"%@", [NSDate date]);
+    NSLog(@"pop animation:%@", [NSDate date]);
 #endif
-    UIImage *fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:toVC.tabBarController.view];
-    if (!fromVcScreenshot) {
+    UIImage *fromVcScreenshot = nil; // [UIImage at_screenShotImageWithCaptureView:toVC.tabBarController.view];
+
+    if (toVC.tabBarController) {
+        fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:toVC.tabBarController.view];
+    } else {
         fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:toVC.navigationController.view];
     }
     UIImage *toVcScreenshot = [[CATPageManager shareManager] firstObjc];
 #if DEBUG
-    NSLog(@"%@", [NSDate date]);
+    NSLog(@"pop animation:%@", [NSDate date]);
 #endif
     UIImageView *fromVcCover = [[UIImageView alloc] initWithImage:fromVcScreenshot];
     fromVcCover.bounds = containerView.bounds;
