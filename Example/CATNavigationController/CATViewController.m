@@ -11,6 +11,9 @@
 #import "CATNavigationController.h"
 #import "CATChildTableViewController.h"
 #import "CATChildWebViewController.h"
+#import "CATChildCollectionViewController.h"
+#import "CATChildHorizontalCollectionViewController.h"
+
 #import "UINavigationBar+CATCustom.h"
 
 
@@ -56,21 +59,30 @@
         cell.textLabel.text = @"Push to UITableViewController.";
     } else if (indexPath.row == 1) {
         cell.textLabel.text = @"Push To UIWebViewController";
+    } else if (indexPath.row == 2) {
+        cell.textLabel.text = @"Push To UICollectionViewController";
+    }else if (indexPath.row == 3){
+        cell.textLabel.text = @"Push To HorizontalCollectionViewController";
     }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIViewController *vc = nil;
     if (indexPath.row == 0) {
-        CATChildTableViewController *vc = [[CATChildTableViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
+        vc = [[CATChildTableViewController alloc] init];
     } else if (indexPath.row == 1) {
-        CATChildWebViewController *vc = [[CATChildWebViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        vc = [[CATChildWebViewController alloc] init];
+    }else if (indexPath.row == 2){
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        vc = [[CATChildCollectionViewController alloc] initWithCollectionViewLayout:layout];
+    }else if (indexPath.row == 3){
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        vc = [[CATChildHorizontalCollectionViewController alloc] initWithCollectionViewLayout:layout];
     } else {
-        CATChildViewController *nvc = [[CATChildViewController alloc] init];
-        [self.navigationController pushViewController:nvc animated:YES];
+         vc = [[CATChildViewController alloc] init];
     }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

@@ -19,14 +19,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     UIWebView *webView = [[UIWebView alloc] init];
+    webView.frame = self.view.bounds;
     [self.view addSubview:webView];
+    self.webView = webView;
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
+    [self.webView loadRequest:request];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

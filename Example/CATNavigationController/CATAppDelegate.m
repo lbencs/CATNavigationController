@@ -40,6 +40,8 @@
     //	image = [UIImage imageNamed:@"comment_ico_back_normal"];
     //	image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     //	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:image];
+    
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor whiteColor]];
 
     UITabBarController *tvc = [[UITabBarController alloc] init];
     UITabBarItem *item1 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemHistory tag:0];

@@ -232,7 +232,7 @@
     NSLog(@"gestureRecognizer:%@ -- otherGesture:%@", gestureRecognizer, otherGestureRecognizer);
     if ([[otherGestureRecognizer view] isKindOfClass:[UIScrollView class]]) {
         UIScrollView *scrollView = (UIScrollView *)otherGestureRecognizer.view;
-        if (scrollView.contentOffset.x <= 0) {
+        if (scrollView.contentOffset.x != 0) {
             //保证当scrollview 不能横向滑动的时候， 只能有一个手势响应。
             //但是有一个问题，当scrollview可以横向滑动会怎么样？
             return NO;
@@ -242,8 +242,6 @@
     }
     return YES;
 }
-
-
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     if (!self._ableInteractivePop) {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550CDE6B1D5B6821002EAADA /* CATChildHorizontalCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 550CDE6A1D5B6821002EAADA /* CATChildHorizontalCollectionViewController.m */; };
 		554C8B101D50319D007187C1 /* CATCustomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554C8B0F1D50319D007187C1 /* CATCustomTableViewController.m */; };
 		554C8B131D5036E2007187C1 /* CATCustomChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 554C8B121D5036E2007187C1 /* CATCustomChildViewController.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -49,6 +50,8 @@
 		098B59F74FDEB446DD1390EF /* libPods-CATNavigationController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CATNavigationController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D95567263F61B08C266CC3 /* libPods-CATNavigationController_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CATNavigationController_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EDF8E6EDDBB38B8D1F16CB /* CATNavigationController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CATNavigationController.podspec; path = ../CATNavigationController.podspec; sourceTree = "<group>"; };
+		550CDE691D5B6821002EAADA /* CATChildHorizontalCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATChildHorizontalCollectionViewController.h; sourceTree = "<group>"; };
+		550CDE6A1D5B6821002EAADA /* CATChildHorizontalCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATChildHorizontalCollectionViewController.m; sourceTree = "<group>"; };
 		554C8B0E1D50319D007187C1 /* CATCustomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATCustomTableViewController.h; sourceTree = "<group>"; };
 		554C8B0F1D50319D007187C1 /* CATCustomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATCustomTableViewController.m; sourceTree = "<group>"; };
 		554C8B111D5036E2007187C1 /* CATCustomChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATCustomChildViewController.h; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				BDD321721D50714C00275478 /* CATChildTableViewController.m */,
 				BDD321741D507E2F00275478 /* CATChildCollectionViewController.h */,
 				BDD321751D507E2F00275478 /* CATChildCollectionViewController.m */,
+				550CDE691D5B6821002EAADA /* CATChildHorizontalCollectionViewController.h */,
+				550CDE6A1D5B6821002EAADA /* CATChildHorizontalCollectionViewController.m */,
 				BDD321771D50876000275478 /* CATChildWebViewController.h */,
 				BDD321781D50876000275478 /* CATChildWebViewController.m */,
 				BDA97D561D11462C00CA862A /* CATDogTabViewController.h */,
@@ -539,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* CATAppDelegate.m in Sources */,
+				550CDE6B1D5B6821002EAADA /* CATChildHorizontalCollectionViewController.m in Sources */,
 				BDA046761D1269B9000F3B61 /* CATDogChildViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* CATViewController.m in Sources */,
 				BDD321761D507E2F00275478 /* CATChildCollectionViewController.m in Sources */,
