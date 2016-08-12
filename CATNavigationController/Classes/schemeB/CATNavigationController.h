@@ -26,6 +26,8 @@
 
 @interface UIViewController (CATNavigationController)
 
++ (void)at_customDisbaleAtPropertyForViewControllers:(NSArray *(^)())viewControllersBlock;
+
 //default is YES, when push from viewcontroller with UITabBarController,yes: show UITabBar, no: hidden UITabBar.
 @property (nonatomic, assign, setter=at_setShowTabBar:) BOOL at_showTabBar;
 

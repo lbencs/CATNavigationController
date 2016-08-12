@@ -229,14 +229,25 @@
 #pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    NSLog(@"gestureRecognizer:%@ -- otherGesture:%@", gestureRecognizer, otherGestureRecognizer);
+//    NSLog(@"gestureRecognizer:%@ -- otherGesture:%@", gestureRecognizer, otherGestureRecognizer);
     if ([[otherGestureRecognizer view] isKindOfClass:[UIScrollView class]]) {
         UIScrollView *scrollView = (UIScrollView *)otherGestureRecognizer.view;
-        if (scrollView.contentOffset.x != 0) {
-            //保证当scrollview 不能横向滑动的时候， 只能有一个手势响应。
-            //但是有一个问题，当scrollview可以横向滑动会怎么样？
+		CGPoint point;
+		if ([otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")]) {
+			UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer *)otherGestureRecognizer;
+			point = [panGestureRecognizer velocityInView:panGestureRecognizer.view];
+			NSLog(@"%@",NSStringFromCGPoint(point));
+		}
+        if (scrollView.contentOffset.x != 0 ||
+			scrollView.frame.size.width == scrollView.contentSize.width ||
+			point.x <= -80) {
+            /*
+			 1. 保证当scrollview 不能横向滑动的时候， 只能有一个手势响应。
+             2. 当scrollview可以横向滑动时，当contentOffset.x != 0时,不允许两个同时滑动
+			 */
             return NO;
         } else {
+			NSLog(@"-------------------YES");
             return YES;
         }
     }
@@ -291,7 +302,6 @@
 - (BOOL)_useCustomNavigationAnimation
 {
     return self._delegate != nil;
-    //    return [self.delegate isKindOfClass:[CATNavigationControllerDelegate class]];
 }
 
 CATAssociatedBoolProperty(_ableInteractivePop, _setAbleInteractivePop:);
@@ -302,6 +312,14 @@ CATAssociatedProperty(at_interactivePopTransition, at_setInteractivePopTransitio
 
 @end
 
+NSMutableArray *CATDisableAtPropertyViewControllers(){
+	static dispatch_once_t onceToken;
+	static NSMutableArray *viewControllers = nil;
+	dispatch_once(&onceToken, ^{
+		viewControllers = [[NSMutableArray alloc] init];
+	});
+	return viewControllers;
+}
 
 @implementation UIViewController (CATNavigationController)
 + (void)load
@@ -318,24 +336,20 @@ CATAssociatedProperty(at_interactivePopTransition, at_setInteractivePopTransitio
     [self at_viewWillAppear:animated];
 
     [[UIApplication sharedApplication] setStatusBarStyle:self.at_statusBarStyle animated:YES];
-
+	//当一个页面触发几个UIViewController的时候，这里容易出问题
+	//感觉是错误的使用了UIViewController的原因。 有些地方并不需要使用到Controller的地步
     if ([self.navigationController isKindOfClass:[CATNavigationController class]] &&
         ![self isKindOfClass:NSClassFromString(@"GXQNetworkLoadingViewController")] &&
         ![self isKindOfClass:NSClassFromString(@"GXQNetworkFailedViewController")] &&
         ![self isKindOfClass:NSClassFromString(@"GXQTabBarController")]) {
+		
         [self.navigationController setNavigationBarHidden:self.at_hiddenNavigationBar];
         [self.tabBarController.tabBar setHidden:!self.at_showTabBar];
-
-        CATNavigationController *navigationController = (CATNavigationController *)self.navigationController;
-
-        navigationController._ableInteractivePop = !self.at_disableInteractivePop;
-
-        if (self.at_navigationBarBackgroundColor) {
-            [self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor];
-        } else {
-            [self.navigationController.navigationBar at_setBackgroundColor:[UINavigationBar appearance].backgroundColor];
-        }
-
+		
+		self.navigationController._ableInteractivePop = !self.at_disableInteractivePop;
+		
+		[self.navigationController.navigationBar at_setBackgroundColor:self.at_navigationBarBackgroundColor?:[[UINavigationBar appearance] backgroundColor]];
+			
         if (self.at_navigationBarBottomLineColor) {
             [self.navigationController.navigationBar at_setBottomLineColor:self.at_navigationBarBottomLineColor];
         } else {
@@ -343,6 +357,15 @@ CATAssociatedProperty(at_interactivePopTransition, at_setInteractivePopTransitio
         }
     }
 }
++ (void)at_customDisbaleAtPropertyForViewControllers:(NSArray *(^)())viewControllersBlock{
+	if (viewControllersBlock) {
+		NSArray *viewControllers = viewControllersBlock();
+		if (viewControllers) {
+			[CATDisableAtPropertyViewControllers() addObjectsFromArray:viewControllers];
+		}
+	}
+}
+
 
 CATAssociatedBoolProperty(at_hiddenNavigationBar, at_setHiddenNavigationBar:);
 CATAssociatedBoolProperty(at_showTabBar, at_setShowTabBar:);

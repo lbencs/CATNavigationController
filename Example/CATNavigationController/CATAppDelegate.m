@@ -59,7 +59,10 @@
     UITabBarItem *item4 = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:3];
     CATCustomTableViewController *vc4 = [[CATCustomTableViewController alloc] init];
     item4.title = @"CCustom";
-    
+	
+	[UIViewController at_customDisbaleAtPropertyForViewControllers:^NSArray *{
+		return @[NSClassFromString(@"CATCustomTableViewController")];
+	}];
     
 
 #if A

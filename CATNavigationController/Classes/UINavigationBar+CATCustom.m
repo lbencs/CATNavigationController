@@ -12,14 +12,8 @@
 
 extern NSInteger const kCATCustomExcludeAlphaTag = 999012;
 
-static char CATCustomMaskLayerKey;
-static char CATCustomBackgroundImageKey;
-static char CATCustomEmptyImageKey;
-
-
 @interface UINavigationBar ()
 @property (nonatomic, strong, setter=_setMaskLayer:) UIView *_maskLayer;
-//@property (nonatomic, strong, setter=_setBackgroundImage:) UIImage *_backgroundImage;
 @end
 
 
@@ -29,35 +23,26 @@ static char CATCustomEmptyImageKey;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        //        CATSwizzeMethod(self, @selector(setBackgroundImage:), @selector(at_setBackgroundImage:));
-        //        CATSwizzeMethod(self, @selector(setBackgroundImage:forBarMetrics:), @selector(at_setBackgroundImage:forBarMetrics:));
-        //        CATSwizzeMethod(self, @selector(setBackgroundImage:forBarPosition:barMetrics:), @selector(at_setBackgroundImage:forBarPosition:barMetrics:));
         CATSwizzeMethod(self, @selector(setTranslucent:), @selector(at_setTranslucent:));
+		CATSwizzeMethod(self, @selector(setBackgroundImage:forBarMetrics:), @selector(at_setBackgroundImage:forBarMetrics:));
     });
 }
+#pragma mark - swizze
 - (void)at_setTranslucent:(BOOL)translucent
 {
     [self at_setTranslucent:translucent];
     [self _clearBackgroundColorAtView:self];
 }
-- (void)at_setBackgroundImage:(UIImage *)image
-{
-    [self at_setBackgroundImage:image];
-}
 - (void)at_setBackgroundImage:(UIImage *)backgroundImage forBarMetrics:(UIBarMetrics)barMetrics
 {
-    [self at_setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
-}
-
-- (void)at_setBackgroundImage:(UIImage *)backgroundImage forBarPosition:(UIBarPosition)barPosition barMetrics:(UIBarMetrics)barMetrics
-{
-    [self at_setBackgroundImage:backgroundImage forBarPosition:barPosition barMetrics:barMetrics];
+	[self at_setBackgroundImage:backgroundImage forBarMetrics:barMetrics];
+	[self _clearBackgroundColorAtView:self];
 }
 
 
+#pragma mark - public
 - (void)at_setBackgroundColor:(UIColor *)backgroundColor
 {
-    //	self.translucent = YES;
     self._maskLayer.backgroundColor = backgroundColor;
 }
 - (void)at_setContentAlpha:(CGFloat)alpha
@@ -72,7 +57,7 @@ static char CATCustomEmptyImageKey;
 - (void)at_setBottomLineColor:(UIColor *)color
 {
     [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    UIImage *line = [UIImage at_imageWithColor:color withSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0.3)];
+	UIImage *line = [UIImage at_imageWithColor:color withSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), 0.3)];
     [self at_setBottomLineImage:line];
 }
 - (void)at_setBottomLineImage:(UIImage *)image
@@ -82,6 +67,7 @@ static char CATCustomEmptyImageKey;
 }
 
 #pragma mark - privates methods
+
 - (void)_setAlpha:(CGFloat)alpha forSubviewsOfView:(UIView *)view
 {
     for (UIView *v in view.subviews) {
@@ -114,11 +100,8 @@ static char CATCustomEmptyImageKey;
 - (UIView *)_maskLayer
 {
     UIView *layer = objc_getAssociatedObject(self, _cmd);
-
-    [self _clearBackgroundColorAtView:self];
-
     if (!layer) {
-        [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+		[self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         layer = [[UIView alloc] initWithFrame:CGRectMake(0, -20, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight(self.bounds) + 20)];
         layer.userInteractionEnabled = NO;
         layer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
