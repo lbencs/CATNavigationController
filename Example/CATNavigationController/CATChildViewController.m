@@ -86,7 +86,7 @@ static int i = 0;
         [self.navigationController popToViewController:self.topVC animated:YES];
     }
 }
-- (void)btnClick4:(UIButton *)sender
+- (void)btnClick4:(UIButton *)sendercd
 {
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

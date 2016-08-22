@@ -59,7 +59,7 @@
     } else if (operation == UINavigationControllerOperationPush) {
         return [[CATPushTransitionAnimation alloc] init];
     } else if (operation == UINavigationControllerOperationNone) {
-        NSLog(@"none");
+//        NSLog(@"none");
     }
 
     return nil;
@@ -236,7 +236,7 @@
 		if ([otherGestureRecognizer isKindOfClass:NSClassFromString(@"UIScrollViewPanGestureRecognizer")]) {
 			UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer *)otherGestureRecognizer;
 			point = [panGestureRecognizer velocityInView:panGestureRecognizer.view];
-			NSLog(@"%@",NSStringFromCGPoint(point));
+//			NSLog(@"%@",NSStringFromCGPoint(point));
 		}
         if (scrollView.contentOffset.x != 0 ||
 			scrollView.frame.size.width == scrollView.contentSize.width ||
@@ -247,7 +247,7 @@
 			 */
             return NO;
         } else {
-			NSLog(@"-------------------YES");
+//			NSLog(@"-------------------YES");
             return YES;
         }
     }
