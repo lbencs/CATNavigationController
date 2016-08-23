@@ -26,6 +26,7 @@
 		8574001F4F0F88D7791E4EB1 /* libPods-CATNavigationController_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D95567263F61B08C266CC3 /* libPods-CATNavigationController_Tests.a */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		A38DA841D9F90E4B6CD34DE7 /* libPods-CATNavigationController_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 098B59F74FDEB446DD1390EF /* libPods-CATNavigationController_Example.a */; };
+		BD2A1B201D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2A1B1F1D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.m */; };
 		BDA046761D1269B9000F3B61 /* CATDogChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA046751D1269B9000F3B61 /* CATDogChildViewController.m */; };
 		BDA046791D127594000F3B61 /* CATChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA046781D127594000F3B61 /* CATChildViewController.m */; };
 		BDA0467B1D127701000F3B61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDA0467A1D127701000F3B61 /* LaunchScreen.storyboard */; };
@@ -80,6 +81,8 @@
 		A4EA8F093C61DA2834738AF4 /* Pods-CATNavigationController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CATNavigationController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CATNavigationController_Example/Pods-CATNavigationController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B60FF063B9DA101AF3C64103 /* Pods-CATNavigationController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CATNavigationController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CATNavigationController_Tests/Pods-CATNavigationController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BCF3885C7F8D9CEB791CD49A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		BD2A1B1E1D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATChildNaviAlphaViewController.h; sourceTree = "<group>"; };
+		BD2A1B1F1D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CATChildNaviAlphaViewController.m; sourceTree = "<group>"; };
 		BDA046741D1269B9000F3B61 /* CATDogChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CATDogChildViewController.h; path = ../CATDogChildViewController.h; sourceTree = "<group>"; };
 		BDA046751D1269B9000F3B61 /* CATDogChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CATDogChildViewController.m; path = ../CATDogChildViewController.m; sourceTree = "<group>"; };
 		BDA046771D127594000F3B61 /* CATChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CATChildViewController.h; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				550CDE6A1D5B6821002EAADA /* CATChildHorizontalCollectionViewController.m */,
 				BDD321771D50876000275478 /* CATChildWebViewController.h */,
 				BDD321781D50876000275478 /* CATChildWebViewController.m */,
+				BD2A1B1E1D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.h */,
+				BD2A1B1F1D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.m */,
 				BDA97D561D11462C00CA862A /* CATDogTabViewController.h */,
 				BDA97D571D11462C00CA862A /* CATDogTabViewController.m */,
 				BDA046741D1269B9000F3B61 /* CATDogChildViewController.h */,
@@ -554,6 +559,7 @@
 				BDD321791D50876000275478 /* CATChildWebViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				BDA97D581D11462C00CA862A /* CATDogTabViewController.m in Sources */,
+				BD2A1B201D6AAB9000FD5D61 /* CATChildNaviAlphaViewController.m in Sources */,
 				554C8B131D5036E2007187C1 /* CATCustomChildViewController.m in Sources */,
 				BDA046791D127594000F3B61 /* CATChildViewController.m in Sources */,
 			);

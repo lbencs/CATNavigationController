@@ -25,11 +25,11 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector);
 
 @property (nonatomic, assign) CATNavigationPopAnimation *animationStatus;
 
-- (void)push:(UIImage *)objc;
-- (UIImage *)pop;
-
-- (UIImage *)firstObjc;
-- (NSInteger)count;
+//- (void)push:(UIImage *)objc;
+//- (UIImage *)pop;
+//
+//- (UIImage *)firstObjc;
+//- (NSInteger)count;
 
 @property (nonatomic, strong) UIImage *cache;
 @end
@@ -46,5 +46,13 @@ CATSwizzeMethod(Class aClass,SEL originalSelector, SEL swizzledSelector);
 
 @interface UITabBar (CAT)
 - (void)at_setAlpha:(CGFloat)alpha;
+@end
+
+@interface UINavigationController (CAT)
+- (void)at_push:(UIImage *)objc;
+- (UIImage *)at_pop;
+
+- (UIImage *)at_firstObjc;
+- (NSInteger)at_count;
 @end
 

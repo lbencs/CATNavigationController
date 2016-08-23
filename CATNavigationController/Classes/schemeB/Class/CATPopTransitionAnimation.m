@@ -38,7 +38,7 @@
     } else {
         fromVcScreenshot = [UIImage at_screenShotImageWithCaptureView:toVC.navigationController.view];
     }
-    UIImage *toVcScreenshot = [[CATPageManager shareManager] firstObjc];
+    UIImage *toVcScreenshot = [self.navigationController at_firstObjc];
 #if DEBUG
     NSLog(@"pop animation:%@", [NSDate date]);
 #endif

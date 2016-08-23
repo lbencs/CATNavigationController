@@ -13,6 +13,7 @@
 #import "CATChildWebViewController.h"
 #import "CATChildCollectionViewController.h"
 #import "CATChildHorizontalCollectionViewController.h"
+#import "CATChildNaviAlphaViewController.h"
 
 #import "UINavigationBar+CATCustom.h"
 
@@ -61,9 +62,11 @@
         cell.textLabel.text = @"Push To UIWebViewController";
     } else if (indexPath.row == 2) {
         cell.textLabel.text = @"Push To UICollectionViewController";
-    }else if (indexPath.row == 3){
+    }else if (indexPath.row == 3) {
         cell.textLabel.text = @"Push To HorizontalCollectionViewController";
-    }
+	}else if (indexPath.row == 4) {
+		cell.textLabel.text = @"CATChildNaviAlphaViewController";
+	}
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,7 +83,9 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         vc = [[CATChildHorizontalCollectionViewController alloc] initWithCollectionViewLayout:layout];
-    } else {
+	}else if(indexPath.row == 4){
+		vc = [[CATChildNaviAlphaViewController alloc] init];
+	} else {
          vc = [[CATChildViewController alloc] init];
     }
     [self.navigationController pushViewController:vc animated:YES];

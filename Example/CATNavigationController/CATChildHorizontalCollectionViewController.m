@@ -8,7 +8,7 @@
 
 #import "CATChildHorizontalCollectionViewController.h"
 
-@interface CATChildHorizontalCollectionViewController ()<UICollectionViewDelegateFlowLayout>
+@interface CATChildHorizontalCollectionViewController ()<UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
 @end
 
@@ -36,6 +36,11 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
+#pragma mark - <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	NSLog(@"%@",scrollView);
+}
 #pragma mark <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 2;

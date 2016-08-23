@@ -30,7 +30,7 @@
     bottomView.backgroundColor = [UIColor blackColor];
     [containerView addSubview:bottomView];
 
-    UIImage *fromVcImage = [[CATPageManager shareManager] firstObjc];
+    UIImage *fromVcImage = [self.navigationController at_firstObjc];
     UIImageView *fromVcCover = [[UIImageView alloc] initWithImage:fromVcImage];
     fromVcCover.frame = [UIScreen mainScreen].bounds;
     [containerView addSubview:fromVcCover];

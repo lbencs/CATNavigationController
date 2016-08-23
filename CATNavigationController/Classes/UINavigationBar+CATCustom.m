@@ -45,6 +45,12 @@ extern NSInteger const kCATCustomExcludeAlphaTag = 999012;
 {
     self._maskLayer.backgroundColor = backgroundColor;
 }
+- (void)at_setContentAlphaExcludeBackgroundColor:(CGFloat)alpha
+{
+	self._maskLayer.tag = kCATCustomExcludeAlphaTag;
+	[self at_setContentAlpha:alpha];
+	self._maskLayer.tag = 0;
+}
 - (void)at_setContentAlpha:(CGFloat)alpha
 {
     alpha = MIN(MAX(0, alpha), 1);
@@ -71,13 +77,14 @@ extern NSInteger const kCATCustomExcludeAlphaTag = 999012;
 - (void)_setAlpha:(CGFloat)alpha forSubviewsOfView:(UIView *)view
 {
     for (UIView *v in view.subviews) {
-        if (v == self._maskLayer) {
-            continue;
-        } else if ([v isKindOfClass:NSClassFromString(@"_UINavigationBarBackIndicatorView")]) {
+		
+		if ([v isKindOfClass:NSClassFromString(@"_UINavigationBarBackIndicatorView")]) {
             continue;
         } else if (v.tag == kCATCustomExcludeAlphaTag) {
             continue;
-        }
+		} else if ([v isKindOfClass:NSClassFromString(@"UINavigationItemButtonView")]) {
+			continue;
+		}
 
         v.alpha = alpha;
 
@@ -108,6 +115,7 @@ extern NSInteger const kCATCustomExcludeAlphaTag = 999012;
         [self insertSubview:layer atIndex:0];
         [self _setMaskLayer:layer];
     }
+	self.backgroundColor = [UIColor clearColor];
     return layer;
 }
 - (void)_setMaskLayer:(UIView *)maskLayer

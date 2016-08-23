@@ -183,3 +183,68 @@ void CATSubViewSetAlpha(CGFloat alpha, UIView *superView)
 }
 
 @end
+
+@interface UINavigationController ()
+@property (nonatomic, strong, readonly) NSMutableArray *_pages;
+@end
+
+@implementation UINavigationController (CAT)
+- (void)at_push:(UIImage *)objc
+{
+	if (objc) {
+		[self._pages addObject:objc];
+	}
+#if DEBUG
+	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+	UILabel *label = [keyWindow viewWithTag:501934];
+	if (!label || ![label isKindOfClass:[UILabel class]]) {
+		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, keyWindow.bounds.size.width, 44)];
+		label.tag = 501934;
+		[keyWindow addSubview:label];
+	}
+	[keyWindow bringSubviewToFront:label];
+	label.text = [NSString stringWithFormat:@"ImageCache:%ld", (long)self._pages.count];
+	
+	NSLog(@"Push:%@", self._pages);
+#endif
+}
+- (UIImage *)at_firstObjc
+{
+	return [self._pages lastObject];
+}
+- (UIImage *)at_pop
+{
+	UIImage *img = [self._pages lastObject];
+	if (img) {
+		[self._pages removeObject:img];
+	}
+#if DEBUG
+	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+	UILabel *label = [keyWindow viewWithTag:501934];
+	if (!label || ![label isKindOfClass:[UILabel class]]) {
+		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, keyWindow.bounds.size.width, 44)];
+		label.tag = 501934;
+		[keyWindow addSubview:label];
+	}
+	[keyWindow bringSubviewToFront:label];
+	label.text = [NSString stringWithFormat:@"ImageCache:%ld", (long)self._pages.count];
+	NSLog(@"Pop: %@ ", self._pages);
+#endif
+	return img;
+}
+- (NSInteger)at_count
+{
+	return [self._pages count];
+}
+
+#pragma mark -
+- (NSMutableArray *)_pages
+{
+	NSMutableArray *pages = objc_getAssociatedObject(self, _cmd);
+	if (!pages) {
+		pages = [[NSMutableArray alloc] init];
+		objc_setAssociatedObject(self, _cmd, pages, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	}
+	return pages;
+}
+@end

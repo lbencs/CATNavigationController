@@ -10,6 +10,8 @@
 
 @interface CATTransitionAnimation : NSObject <UIViewControllerAnimatedTransitioning>
 
+@property (nonatomic, weak) UINavigationController *navigationController; /**< <#annotation#> */
+
 @property (nonatomic, copy) void(^completionHandler)();
 @property (nonatomic, copy) void(^beginHandler)(id<UIViewControllerContextTransitioning> transitionContext);
 
