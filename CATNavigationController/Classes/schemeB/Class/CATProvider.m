@@ -196,14 +196,19 @@ void CATSubViewSetAlpha(CGFloat alpha, UIView *superView)
 	}
 #if DEBUG
 	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-	UILabel *label = [keyWindow viewWithTag:501934];
-	if (!label || ![label isKindOfClass:[UILabel class]]) {
-		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, keyWindow.bounds.size.width, 44)];
-		label.tag = 501934;
+	if (![keyWindow isKindOfClass:NSClassFromString(@"BlockBackground")]) {
+		UILabel *label = [keyWindow viewWithTag:501934];
+		if (!label || ![label isKindOfClass:[UILabel class]]) {
+			label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, keyWindow.bounds.size.width, 22)];
+			label.tag = 501934;
+			label.font = [UIFont systemFontOfSize:8];
+		}
+		[label removeFromSuperview];
 		[keyWindow addSubview:label];
+		[keyWindow bringSubviewToFront:label];
+		label.text = [NSString stringWithFormat:@"%@:ImageCache:%ld",self, (long)self._pages.count];
+		[label sizeToFit];
 	}
-	[keyWindow bringSubviewToFront:label];
-	label.text = [NSString stringWithFormat:@"ImageCache:%ld", (long)self._pages.count];
 	
 	NSLog(@"Push:%@", self._pages);
 #endif
@@ -220,14 +225,19 @@ void CATSubViewSetAlpha(CGFloat alpha, UIView *superView)
 	}
 #if DEBUG
 	UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-	UILabel *label = [keyWindow viewWithTag:501934];
-	if (!label || ![label isKindOfClass:[UILabel class]]) {
-		label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, keyWindow.bounds.size.width, 44)];
-		label.tag = 501934;
+	if (![keyWindow isKindOfClass:NSClassFromString(@"BlockBackground")]) {
+		UILabel *label = [keyWindow viewWithTag:501934];
+		if (!label || ![label isKindOfClass:[UILabel class]]) {
+			label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, keyWindow.bounds.size.width, 22)];
+			label.tag = 501934;
+			label.font = [UIFont systemFontOfSize:8];
+		}
+		[label removeFromSuperview];
 		[keyWindow addSubview:label];
+		[keyWindow bringSubviewToFront:label];
+		label.text = [NSString stringWithFormat:@"%@:ImageCache:%ld",self, (long)self._pages.count];
+		[label sizeToFit];
 	}
-	[keyWindow bringSubviewToFront:label];
-	label.text = [NSString stringWithFormat:@"ImageCache:%ld", (long)self._pages.count];
 	NSLog(@"Pop: %@ ", self._pages);
 #endif
 	return img;
